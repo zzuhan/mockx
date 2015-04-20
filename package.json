@@ -1,0 +1,33 @@
+{
+  "name": "mockx",
+  "version": "0.0.2",
+  "description": "Generate random data(by mockjs tpl), middleware.Can use local, js data and fetch remote",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "juicer": "^0.6.8-stable",
+    "merge": "^1.2.0",
+    "mockjs": "^0.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test/test-mock-middleware"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zzuhan/mockx"
+  },
+  "keywords": [
+    "mock"
+  ],
+  "author": "zzuhan",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/zzuhan/mockx/issues"
+  },
+  "homepage": "https://github.com/zzuhan/mockx"
+}

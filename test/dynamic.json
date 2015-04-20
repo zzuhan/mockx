@@ -1,0 +1,6 @@
+{
+	"date": "${query.date}",
+	"id|numer": "${cookie.}"
+}
+
+// variable template
