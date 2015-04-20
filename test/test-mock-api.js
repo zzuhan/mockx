@@ -3,12 +3,12 @@
 
 var Mock = require('../index');
 
-var tpl = JSON.stringify({
+var tpl = {
 	"name": "${query.name}",
 	"avatar": "@image(200x200)",
 	"age|1-100.1-10": 2,
 	"blog": "@url"
-});
+}
 var data = {
 	query: {
 	// 	// name: 'han'
