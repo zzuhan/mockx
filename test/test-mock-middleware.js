@@ -37,9 +37,8 @@ var next = function(){
 }
 
 var handle = MockMiddleware({
-	confFile: '/Users/hanwencheng/work/mock/test/config.json',
 	hosts: {}
-});
+}, '/Users/hanwencheng/work/mockx/test/');
 handle(req, res, next);
 
 // 2 测试Mock作为一个API使用

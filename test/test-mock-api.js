@@ -3,16 +3,17 @@
 
 var Mock = require('../index');
 
+var data = {
+	query: {
+		name: 'han'
+	}
+}
+
 var tpl = {
 	"name": "${query.name}",
 	"avatar": "@image(200x200)",
 	"age|1-100.1-10": 2,
 	"blog": "@url"
-}
-var data = {
-	query: {
-	// 	// name: 'han'
-	}
 }
 
 var ret = Mock.mock(tpl, data);
