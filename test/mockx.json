@@ -1,8 +1,15 @@
 [
 	{
 		"route": "/about/copyright.php",
-		"json": "mock/copyright.json",
-		"jsData": "#mock/myconfig.js",
+		"query": {
+			"action": "abc"
+		},
+		"json": "#mock/copyright.json",
+		"jsData": "mock/myconfig.js",
 		"remote": "#http://baidu.com"
+	},
+	{
+		"route": "/",
+		"remote": ""
 	}
 ]

@@ -3,7 +3,7 @@
 var MockMiddleware = require('../index').middleware;
 
 var req = {
-	url: 'http://www.taobao.com/about/copyright.php?callback=123&name=oboa-a',
+	url: 'http://www.taobao.com/about/copyright.php?callback=123&name=oboa-a&action=abc',
 	body: {
 		token: 'xxx'
 	},

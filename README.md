@@ -62,3 +62,8 @@ var userInfo = require('mockx').mock({
 
 ```
 
+
+# 开发计划
+
+- remote转发(proxy)到线上服务器的数据
+- 可以添加cookie字段，或者是trasnsparent的转发
