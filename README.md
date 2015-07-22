@@ -2,7 +2,7 @@ MockX
 
 目前包含了 middleware, mock 两种类型
 
-# mock
+# mock 类库
 
 ```
 require('mockx').mock(tpl[, data]);
@@ -27,7 +27,6 @@ var userInfo = require('mockx').mock({
 	}
 });
 
-
 ```
 
 # middleware
@@ -46,11 +45,12 @@ var userInfo = require('mockx').mock({
 ## mockx.json配置文件
 
 ```
-// mockx.json
+路径为 confDir/mockx.json
 
 [
 	{
 		"route": "/about/copyright.php",
+		"query": ""
 		// 如果是jsonp请求，则添加
 		"jsonp": "callback",
 		"json": "mock/copyright.json",
@@ -60,10 +60,15 @@ var userInfo = require('mockx').mock({
 	}
 ]
 
-```
+## jsData
 
+```
 
 # 开发计划
 
 - remote转发(proxy)到线上服务器的数据
 - 可以添加cookie字段，或者是trasnsparent的转发
+
+- query和route支持正则
+- query应该是支持post的req.body
+- 延时功能
