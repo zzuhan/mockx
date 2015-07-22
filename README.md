@@ -45,12 +45,12 @@ var userInfo = require('mockx').mock({
 ## mockx.json配置文件
 
 ```
-路径为 confDir/mockx.json
+路径为 confDir/mockx.js
 
-[
+module.exports = [
 	{
 		"route": "/about/copyright.php",
-		"query": ""
+		"data": {}
 		// 如果是jsonp请求，则添加
 		"jsonp": "callback",
 		"json": "mock/copyright.json",
