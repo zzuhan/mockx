@@ -2,7 +2,7 @@ module.exports = [
 	{
 		"route": "/about/copyright.php",
 		"json": "mock/copyright.json",
-		"query": {
+		"data": {
 			"callback": "123"
 		},
 		"responseTime": 1000

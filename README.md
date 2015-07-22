@@ -69,6 +69,4 @@ var userInfo = require('mockx').mock({
 - remote转发(proxy)到线上服务器的数据
 - 可以添加cookie字段，或者是trasnsparent的转发
 
-- query和route支持正则
-- query应该是支持post的req.body
-- 延时功能
+- query字段，改成data更好，同时支持post和get
