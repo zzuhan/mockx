@@ -38,7 +38,7 @@ var userInfo = require('mockx').mock({
 ## usage
 
 1. 调用middleware
-	require('mockx').middleware(params, confDir);
+	require('mockx')(params, confDir);
 
 2. mockx.json配置文件
 

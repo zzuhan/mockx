@@ -1,6 +1,6 @@
 // 1 测试Mock做为独立项目配置
 
-var MockMiddleware = require('../index').middleware;
+var MockMiddleware = require('../index');
 
 var req = {
 	url: 'http://www.taobao.com/about/copyright.php?callback=123&name=oboa-a&action=abc',
