@@ -12,12 +12,18 @@ var req = {
 	},
 	query: {
 		callback: 123,
-		name: 'oboa-a'
+		name: 'oboa-a',
+		action: 'abc'
 	},
 	// 把cookie搞到这一层
 	cookies: {
 		id: '1818'
 	}
+}
+
+
+var req = {
+	url: 'http://localhost:8088/templates/screen/index.do?action=admin/audit/itemPreAuditAction&event_submit_do_execute=true'
 }
 
 var res = {
