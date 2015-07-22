@@ -21,17 +21,12 @@ var req = {
 	}
 }
 
-
-var req = {
-	url: 'http://localhost:8088/templates/screen/index.do?action=admin/audit/itemPreAuditAction&event_submit_do_execute=true'
-}
-
 var res = {
 	writeHead: function () {
 		// console.log(arguments);
 	},
-	write: function (jsonContent) {
-		console.log(jsonContent);
+	write: function (mockResult) {
+		console.log(mockResult);
 	},
 	end: function () {
 		// console.log(arguments);

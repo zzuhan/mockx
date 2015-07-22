@@ -60,6 +60,13 @@ var userInfo = require('mockx').mock({
 	}
 ]
 
+## 前提条件
+
+假设你传的req，会经过解析成类似express的。  
+query在req.query中  
+post的数据在req.body中。  
+data的匹配中，post会覆盖query
+
 ## jsData
 
 ```

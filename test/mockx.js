@@ -1,9 +1,10 @@
 module.exports = [
 	{
 		"route": "/about/copyright.php",
-		"json": "mock/copyright.json",
+		"json": "#mock/copyright.json",
+		"jsData": "mock/myconfig.js",
 		"data": {
-			"callback": "123"
+			"name": "oboa-a"
 		},
 		"responseTime": 1000
 	},
