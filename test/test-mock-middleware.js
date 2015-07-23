@@ -25,6 +25,7 @@ var res = {
 	writeHead: function () {
 		// console.log(arguments);
 	},
+	// 用来模仿res.write时，查看结果
 	write: function (mockResult) {
 		console.log(mockResult);
 	},

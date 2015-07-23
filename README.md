@@ -76,4 +76,5 @@ data的匹配中，post会覆盖query
 - remote转发(proxy)到线上服务器的数据
 - 可以添加cookie字段，或者是trasnsparent的转发
 
-- query字段，改成data更好，同时支持post和get
+- 支持host配置，如果配置了host，则仅在host匹配时命中，否则匹配任何host
+- 
