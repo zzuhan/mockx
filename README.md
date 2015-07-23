@@ -77,4 +77,23 @@ data的匹配中，post会覆盖query
 
 - 可以添加cookie字段，或者是trasnsparent的转发
 
+# Change Log
 
+## [0.3.2]
+
+### Added
+
+- 添加了host匹配功能
+
+## [0.3.0]
+
+### Added
+
+- data匹配功能，替代之前的query匹配，同时支持了get和post方式
+
+## [0.2.0]
+
+### Changed
+
+- route和query同时支持正则和字符串
+- 配置文件从json改为node模块
