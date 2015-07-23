@@ -45,12 +45,12 @@ var userInfo = require('mockx').mock({
 ## mockx.json配置文件
 
 ```
-路径为 confDir/mockx.json
+路径为 confDir/mockx.js
 
-[
+module.exports = [
 	{
 		"route": "/about/copyright.php",
-		"query": ""
+		"data": {}
 		// 如果是jsonp请求，则添加
 		"jsonp": "callback",
 		"json": "mock/copyright.json",
@@ -74,7 +74,7 @@ data的匹配中，post会覆盖query
 # 开发计划
 
 - remote转发(proxy)到线上服务器的数据
+
 - 可以添加cookie字段，或者是trasnsparent的转发
 
-- 支持host配置，如果配置了host，则仅在host匹配时命中，否则匹配任何host
-- 
+
