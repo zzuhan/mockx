@@ -7,7 +7,8 @@ module.exports = [
 		"host": /.+\.taobao\.com/i,
 		"json": "#mock/copyright.json",
 		"jsData": "mock/myconfig.js",
-		"responseTime": 500
+		"responseTime": 500,
+		"jsonp": "callback"
 	},
 	{
 		"route": /api\/getUserName\/\d+/i,

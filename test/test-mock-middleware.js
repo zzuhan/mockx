@@ -28,6 +28,7 @@ var res = {
 	// 用来模仿res.write时，查看结果
 	write: function (mockResult) {
 		console.log(mockResult);
+		console.log("aaa");
 	},
 	end: function () {
 		// console.log(arguments);
