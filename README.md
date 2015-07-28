@@ -71,7 +71,14 @@ data的匹配中，post会覆盖query
 
 ```
 
+# 注意事项
+
+- 运行时修改或添加或删除dipSchema或dipApp都需要重新启动服务
+- 
+
 # 开发计划
+
+- cache机制，想覆盖dipSchema的一些字段如何做？比如host写为空的
 
 - 支持DIP projectId
 

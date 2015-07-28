@@ -22,7 +22,7 @@ var MockMiddleware = require('../index');
 // }
 
 var req = {
-	url: 'http://taobao.com/api',
+	url: 'http://g.alicdn.com/aaa.json',
 	query: {
 		age: -1
 	}
