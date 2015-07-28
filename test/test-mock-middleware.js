@@ -22,9 +22,12 @@ var MockMiddleware = require('../index');
 // }
 
 var req = {
-	url: 'http://g.alicdn.com/aaa.json',
+	url: '/aaa.json',
 	query: {
 		age: -1
+	},
+	headers: {
+		host: 'g.alicdn.com'
 	}
 }
 
