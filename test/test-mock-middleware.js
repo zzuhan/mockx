@@ -2,22 +2,29 @@
 
 var MockMiddleware = require('../index');
 
+// var req = {
+// 	url: 'http://www.taobao.com/about/copyright.php?callback=123&name=oboa-a&action=abc',
+// 	body: {
+// 		token: 'xxx'
+// 	},
+// 	headers: {
+// 		cookie: 'xxx'
+// 	},
+// 	query: {
+// 		callback: 123,
+// 		name: 'oboa-a',
+// 		action: 'abc'
+// 	},
+// 	// 把cookie搞到这一层
+// 	cookies: {
+// 		id: '1818'
+// 	}
+// }
+
 var req = {
-	url: 'http://www.taobao.com/about/copyright.php?callback=123&name=oboa-a&action=abc',
-	body: {
-		token: 'xxx'
-	},
-	headers: {
-		cookie: 'xxx'
-	},
+	url: 'http://taobao.com/api',
 	query: {
-		callback: 123,
-		name: 'oboa-a',
-		action: 'abc'
-	},
-	// 把cookie搞到这一层
-	cookies: {
-		id: '1818'
+		age: -1
 	}
 }
 
@@ -28,7 +35,6 @@ var res = {
 	// 用来模仿res.write时，查看结果
 	write: function (mockResult) {
 		console.log(mockResult);
-		console.log("aaa");
 	},
 	end: function () {
 		// console.log(arguments);
@@ -36,7 +42,7 @@ var res = {
 }
 
 var next = function(){
-
+	
 }
 
 var handle = MockMiddleware({
@@ -45,5 +51,3 @@ var handle = MockMiddleware({
 handle(req, res, next);
 
 // 2 测试Mock作为一个API使用
-
-

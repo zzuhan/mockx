@@ -73,11 +73,22 @@ data的匹配中，post会覆盖query
 
 # 开发计划
 
-- remote转发(proxy)到线上服务器的数据
+- 支持DIP projectId
+
+- remote转发时，带上headers和支持POST请求
 
 - 可以添加cookie字段，或者是trasnsparent的转发
 
+
+- 是否要加 type，因为RESTFUL的化，接口地址是一致的，通过type来区分
+
 # Change Log
+
+## [0.4.0]
+
+### Added
+
+- 可以设置DIP schema，自动获取相应的配置
 
 ## [0.3.2]
 
