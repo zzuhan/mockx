@@ -19,8 +19,7 @@ module.exports = [
 		"remote": "http://dip.alibaba-inc.com/api/v2/services/schema/mock/3828"
 	},
 	{
-		"dipSchema": 4879,
-		"host": "localhost"
+		"dipSchema": 4879
 	},
 	{
 		"route": "xxx"

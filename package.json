@@ -15,7 +15,6 @@
     "juicer": "~0.6.10-stable",
     "merge": "~1.2.0",
     "mockjs": "~0.1.10",
-    "request": "~2.60.0",
     "sync-request": "~2.0.1"
   },
   "devDependencies": {},
