@@ -22,7 +22,7 @@ var MockMiddleware = require('../index');
 // }
 
 var req = {
-	url: '/aaa.json',
+	url: '/bbb.json',
 	query: {
 		age: -1
 	},
