@@ -9,9 +9,11 @@ function middleware(params, dir) {
 
   return function (req, res, next) {
     if (res._header) {
-      return next();
+      next();
     }
-    mock.handle(req, res, next);
+    else {
+      mock.handle(req, res, next);
+    }
   }
 }
 
