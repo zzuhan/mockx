@@ -12,7 +12,7 @@
     "fetch-agent": "~0.4.1",
     "iconv-lite": "~0.4.11",
     "is-utf8": "~0.2.0",
-    "juicer": "~0.6.10-stable",
+    "juicer": "~0.6.11",
     "merge": "~1.2.0",
     "mkdirp": "~0.5.1",
     "mockjs": "~0.1.10",
