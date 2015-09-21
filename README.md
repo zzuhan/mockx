@@ -78,6 +78,10 @@ data的匹配中，post会覆盖query
 
 # 开发计划
 
+- DNS检查，如果处于
+
+- 
+
 - cache机制，想覆盖dipSchema的一些字段如何做？比如host写为空的
 
 - 支持DIP projectId

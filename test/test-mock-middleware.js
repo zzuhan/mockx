@@ -24,7 +24,8 @@ var MockMiddleware = require('../index');
 var req = {
 	url: '/bbb.json',
 	query: {
-		age: -1
+		age: -1,
+		name: 'han'
 	},
 	headers: {
 		host: 'g.alicdn.com'
