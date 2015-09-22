@@ -8,7 +8,12 @@ function middleware(params, dir) {
   var mock = new Mock(params, dir);
 
   return function (req, res, next) {
-    mock.handle(req, res, next);
+    if (res._header) {
+      next();
+    }
+    else {
+      mock.handle(req, res, next);
+    }
   }
 }
 

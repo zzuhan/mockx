@@ -26,10 +26,7 @@ module.exports = [
 	// },
 	{
 		"route": "/bbb.json",
-		"json": "mock/copyright.json"
-	},
-	{
-		"route": ""
+		"remote": "http://dip.alibaba-inc.com/api/v2/services/schema/mock/7222"
 	}
 ]
 

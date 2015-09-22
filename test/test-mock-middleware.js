@@ -25,7 +25,11 @@ var req = {
 	url: '/bbb.json',
 	query: {
 		age: -1,
-		name: 'han'
+		name: 'han',
+		callback: 'mtop5'
+	},
+	connection: {
+		encrypted: true
 	},
 	headers: {
 		host: 'g.alicdn.com'
@@ -37,11 +41,11 @@ var res = {
 		// console.log(arguments);
 	},
 	// 用来模仿res.write时，查看结果
-	write: function (mockResult) {
-		console.log(mockResult);
+	write: function (res) {
+		console.log(res);
 	},
-	end: function () {
-		// console.log(arguments);
+	end: function (res) {
+		console.log(res);
 	}
 }
 
