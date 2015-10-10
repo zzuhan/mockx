@@ -22,17 +22,18 @@ var MockMiddleware = require('../index');
 // }
 
 var req = {
-	url: '/bbb.json',
+	url: '/aaa.json',
 	query: {
 		age: -1,
 		name: 'han',
 		callback: 'mtop5'
 	},
+	body: '',
 	connection: {
 		encrypted: true
 	},
 	headers: {
-		host: 'g.alicdn.com'
+		host: 'api.m.taobao.com'
 	}
 }
 

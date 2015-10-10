@@ -2,6 +2,24 @@ MockX
 
 目前包含了 middleware, mock 两种类型
 
+注：里面包含了很多我们项目定制的东西在内，如是基于express，外部公司慎用
+
+# 策略
+
+remote 场景 同域下一部分接口需要拿线上的
+jsData 有一些复杂逻辑处理的
+json 固定结构的json数据，数据的值可以指定某些类型
+
+remote直接原封返回包括headers和body，其实是要做透明代理。对于请求，也要原封的使用req的headers和body
+
+关于一个http response的组成：
+	1 headers
+	2 body
+
+
+
+
+
 # mock 类库
 
 ```
@@ -78,9 +96,10 @@ data的匹配中，post会覆盖query
 
 # 开发计划
 
-- DNS检查，如果处于
+- 关于remote
+	流程图，设计图，remote是否直接做透明转发而不是现在做这么多处理，太麻烦了
 
-- 
+- DNS检查，如果处于
 
 - cache机制，想覆盖dipSchema的一些字段如何做？比如host写为空的
 
