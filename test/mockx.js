@@ -25,8 +25,13 @@ module.exports = [
 	// 	"dipApp": 2361,
 	// },
 	{
+		"route": /.*/i,
+		"host": "api.m.taobao.com",
+		"jsData": "mock/myconfig.js"
+	},
+	{
 		"route": "/bbb.json",
-		"remote": "http://dip.alibaba-inc.com/api/v2/services/schema/mock/7222"
+		"json": "mock/copyright.json"
 	},
 	{
 		"route": "/h5/mtop.taobao.freeway.sellerreport.getshopstatistic/1.0/",

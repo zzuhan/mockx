@@ -89,6 +89,12 @@ data的匹配中，post会覆盖query
 
 ```
 
+# Features
+
+- 透明代理(某个域名下的接口，如api.wapa.taobao.com，新接口在开发中，需要映射到本地，但是老接口需要转发到线上)
+	query, headers信息都会透明转发到线上
+
+
 # 注意事项
 
 - 运行时修改或添加或删除dipSchema或dipApp都需要重新启动服务
