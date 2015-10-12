@@ -5,11 +5,21 @@ module.exports = [
   },
   {
     "route": {},
+    "json": "mock/operate.json"
+  },
+  {
+    "route": {},
     "host": "api.m.taobao.com",
-    "jsData": "mock/myconfig.js"
+    "jsData": "mock/myconfig.js",
+    "priority": ""
+  },
+  {
+    "route": "/operate/xxx.json",
+    "json": "mock/operate.json"
   },
   {
     "route": "/bbb.json",
+    "host": "api.m.taobao.com",
     "json": "mock/copyright.json"
   },
   {

@@ -39,7 +39,7 @@ var MockMiddleware = require('../index');
 
 // route被正则命中
 var req = {
-	url: '/xxx.json',
+	url: '/operate/xxx.json',
 	query: {
 		age: -1,
 		name: 'han',

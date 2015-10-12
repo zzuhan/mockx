@@ -24,15 +24,34 @@ module.exports = [
 	// {
 	// 	"dipApp": 2361,
 	// },
+	// 
+	
+	// api.m.taobao.com/operate/*
+	{
+		"route": /\/operate\/.*/i,
+		"json": "mock/operate.json"
+	},
+
+	// 为api.m.taobao.com下的API兜底
 	{
 		"route": /.*/i,
 		"host": "api.m.taobao.com",
-		"jsData": "mock/myconfig.js"
+		"jsData": "mock/myconfig.js",
+		"priority": ""
 	},
+
+	{
+		"route": "/operate/xxx.json",
+		"json": "mock/operate.json"
+	},
+
+	// api.m.taobao.com/bbb.json
 	{
 		"route": "/bbb.json",
+		"host": "api.m.taobao.com",
 		"json": "mock/copyright.json"
 	},
+
 	{
 		"route": "/h5/mtop.taobao.freeway.sellerreport.getshopstatistic/1.0/",
 		"remote": "self"
