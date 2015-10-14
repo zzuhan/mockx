@@ -8,10 +8,10 @@
     "test": "test"
   },
   "dependencies": {
-    "async": "~0.9.0",
+    "async": "~1.4.2",
     "dns-lookup": "0.0.2",
     "fetch-agent": "~0.4.1",
-    "iconv-lite": "~0.4.11",
+    "iconv-lite": "~0.4.13",
     "is-utf8": "~0.2.0",
     "juicer": "~0.6.11",
     "merge": "~1.2.0",
