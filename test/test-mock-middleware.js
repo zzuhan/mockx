@@ -71,6 +71,8 @@ var next = function(){
 	
 }
 
+console.log(process.cwd());
+
 var handle = MockMiddleware({
 	hosts: {}
 }, '/Users/hanwencheng/work/mockx/test/');

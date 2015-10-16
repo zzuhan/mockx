@@ -2,7 +2,77 @@ MockX
 
 目前包含了 middleware, mock 两种类型
 
-注：里面包含了很多我们项目定制的东西在内，如是基于express，外部公司慎用
+注：里面包含了很多我们项目定制的东西在内，是基于express，外部公司慎用
+
+# 使用
+
+简单的mockx配置文件`mockx.js`事例.配置文件是个node的组件，用module.exports输出一个数组对象。
+
+```
+module.exports = [{
+	"route": "/api/getUserInfo",
+	"json": "mock/getuserinfo.json"
+}]
+```
+## Mockx配置项对象
+
+| 字段        | 描述           | 类型  |
+| ------------- |:-------------:| -----:|
+| route     | 匹配的url路径 | String|Regexp 必填 |
+| query | 匹配的query，如果填了在query也匹配时才会命中此配置  |   Object 可选 |
+| host | 匹配的host，如果填了在host也匹配时才会命中此配置  |    String 可选 |
+| json      | 映射的json文件     | String   |
+| jsData | 映射的js文件      |    String |
+| remote | 转发请求的url, 值填`self`表明透明转发到线上相同url     |    String |
+| jsnop | 如果是jsonp请求，url中jsonp的字段名      |    String |
+
+注：
+
+- 用来限制的字段有三个: `route`, `host`, `query`,  在`host``query`不填的时候，相当于是忽略，只要其他匹配就通过
+- 数据映射的字段有三个: `json`, `jsData`, `remote`
+- `jsonp` 只在 `json` 和 `jsData`时生效
+- query的匹配是部分匹配就可以通过，比如实际的query是`{uid:123, uuid:1123}` 填query`{uid:123}`就算匹配。
+
+## 实例说明
+
+```
+请求了一个url http://xxx.xxx.com/api/getUserInfo?uid=123213&jsonp=123123
+
+则 `host: xxx.xxx.com`, `route: /api/getUserInfo`, `query: {uid: 123213, jsonp:123123}` , `jsonp: jsonp`
+
+```
+
+# 一些说明
+
+## route匹配原则
+
+字符串 > 正则
+先出现的 > 后出现的
+
+## 文件的路径
+
+本地路径的书写格式，只支持相对路径，是相对于此项目的根目录
+
+# 一些常用场景
+
+## 场景1 只映射某域下的某个接口
+
+需求：只映射"api.xxx.com" 域下的"/getUserInfo"接口，其余都转发线上
+
+```
+[{
+	route: /.*/i,
+	host: 'api.xxx.com',
+	remote: 'self'
+},
+{
+	route: '/getUserInfo',
+	host: 'api.xxx.com',
+	json: "mock/getUserInfo.json"
+}]
+
+```
+
 
 # 策略
 
@@ -15,19 +85,6 @@ remote直接原封返回包括headers和body，其实是要做透明代理。对
 关于一个http response的组成：
 	1 headers
 	2 body
-
-
-# 一些说明
-
-## route匹配原则
-
-字符串 > 正则
-先出现的 > 后出现的
-
-## 文件的路径
-
-json, jsData需要写的文件路径
-
 
 
 # mock 类库
