@@ -1,3 +1,698 @@
 {
-	"direction": "horizontal|vertical"
+    "success": true,
+    "message": "",
+    "pageSize": 10,
+    "totalItem": 78,
+    "itemList": [
+        {
+            "juId": 10000013189008,
+            "itemId": 39861026030,
+            "itemName": "（包邮）洋酒 MARTINI Sparkling Rose马天尼粉红甜汽/起泡酒",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/tps/TB1Ypr6IpXXXXb1XpXXXXXXXXXX.png_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013189008",
+            "activityPrice": 8500,
+            "originalPrice": 16800,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 2000,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013189008",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013189008",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013189008",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013189008",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013189008",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013189008",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013189008",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013189402,
+            "itemId": 44394386013,
+            "itemName": "[Jose Cuervo/豪帅金快活]洋酒包邮Jose Cuervo - 1800 Silver豪帅典藏1800银龙舌兰酒（限购6）",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/i3/10000074207447407/TB21lM2cXXXXXb3XpXXXXXXXXXX_!!0-0-juitemmedia.jpg_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013189402",
+            "activityPrice": 19900,
+            "originalPrice": 32500,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 500,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013189402",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013189402",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013189402",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013189402",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013189402",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013189402",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013189402",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013188134,
+            "itemId": 44455364920,
+            "itemName": "洋酒包邮	Jose Cuervo - 1800 Reposado豪帅典藏1800金龙舌兰酒",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/tps/TB1Ypr6IpXXXXb1XpXXXXXXXXXX.png_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013188134",
+            "activityPrice": 20900,
+            "originalPrice": 36500,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 500,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013188134",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013188134",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013188134",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013188134",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013188134",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013188134",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013188134",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013188606,
+            "itemId": 42087686280,
+            "itemName": "[CAMINO REAL/懒虫]【洋酒】CAMINO REAL懒虫金龙舌兰酒 双响炮",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/i3/10000074229503086/TB2hq79cXXXXXcQXXXXXXXXXXXX_!!0-0-juitemmedia.jpg_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013188606",
+            "activityPrice": 14800,
+            "originalPrice": 27600,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 1200,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013188606",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013188606",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013188606",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013188606",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013188606",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013188606",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013188606",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013188317,
+            "itemId": 36041633965,
+            "itemName": "包邮双支Talisker Aged 10YO泰斯卡10年单一麦威士忌",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/i1/10000074209709329/TB2XgE9cXXXXXahXXXXXXXXXXXX_!!0-0-juitemmedia.jpg_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013188317",
+            "activityPrice": 46900,
+            "originalPrice": 95600,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 500,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013188317",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013188317",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013188317",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013188317",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013188317",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013188317",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013188317",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013188106,
+            "itemId": 40958181983,
+            "itemName": "包邮LAPHROAIG Select苏格兰拉弗格精选单一麦威士忌（限购6）",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/i1/10000074239329089/TB2IOQ_cXXXXXaxXXXXXXXXXXXX_!!0-0-juitemmedia.jpg_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013188106",
+            "activityPrice": 25900,
+            "originalPrice": 48800,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 2000,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013188106",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013188106",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013188106",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013188106",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013188106",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013188106",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013188106",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013186764,
+            "itemId": 7383198293,
+            "itemName": "包邮洋酒 Chivas Regal JJ芝华士创始纪念版威士忌",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/tps/TB1Ypr6IpXXXXb1XpXXXXXXXXXX.png_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013186764",
+            "activityPrice": 31800,
+            "originalPrice": 45800,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 2000,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013186764",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013186764",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013186764",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013186764",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013186764",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013186764",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013186764",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013186091,
+            "itemId": 18365715228,
+            "itemName": "【洋酒】Laphroaig拉弗格25年单一麦芽威士忌48.6%/70cl",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/tps/TB1Ypr6IpXXXXb1XpXXXXXXXXXX.png_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013186091",
+            "activityPrice": 329900,
+            "originalPrice": 495000,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 12,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 6,
+                "statusMsg": "待发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013186091",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1002,
+                    "name": "预览",
+                    "url": "/tg/itemMobilePreView.htm?juId=10000013186091",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1013,
+                    "name": "我要发布",
+                    "url": "/tg/myItem.htm?juId=10000013186091",
+                    "isRequired": true,
+                    "meta": {
+                        "juid": "10000013186091",
+                        "actionurl": "/tg/ItemPublishError?juid=10000013186091",
+                        "ajaxurl": "/tg/json/itemPublishGetMsg.do?_input_charset=utf-8"
+                    }
+                },
+                {
+                    "id": 1007,
+                    "name": "完善信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013186091",
+                    "isRequired": true,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013186091",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013177903,
+            "itemId": 20256381909,
+            "itemName": "苏格兰Grant&#39;s Whisky格兰特威士忌双只",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/i1/100000134412195795/TB2vXOKgFXXXXakXpXXXXXXXXXX_!!0-0-juitemmedia.jpg_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013177903",
+            "activityPrice": 11100,
+            "originalPrice": 23600,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 1000,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 7,
+                "statusMsg": "已发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013177903",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1004,
+                    "name": "查看团链",
+                    "url": "//detail.ju.taobao.com/home.htm?itemId=20256381909&amp;id=10000013177903",
+                    "isRequired": false,
+                    "meta": {
+                        "shorturl": "http://tb.cn/PnG0slx",
+                        "longurl": "//detail.ju.taobao.com/home.htm?itemId=20256381909&amp;id=10000013177903"
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1007,
+                    "name": "修改信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013177903",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013177903",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        },
+        {
+            "juId": 10000013173571,
+            "itemId": 523818224972,
+            "itemName": "英国原装Haig Club翰格蓝爵谷物威士忌",
+            "itemPicUrl": "//gju1.alicdn.com/bao/uploaded/i1/100000134432393512/TB2AMq7gFXXXXapXXXXXXXXXXXX_!!0-0-juitemmedia.jpg_80x80.jpg",
+            "itemUrl": "/tg/item_detail.htm?ju_id=10000013173571",
+            "activityPrice": 59900,
+            "originalPrice": 99800,
+            "soldCount": 0,
+            "itemInventory": 0,
+            "itemCount": 500,
+            "showStartTime": "2015-11-01 00:00",
+            "showEndTime": "2015-11-11 23:59",
+            "onlineStartTime": "2015-11-11 00:00",
+            "onlineEndTime": "2015-11-11 23:59",
+            "itemStatus": {
+                "statusCode": 7,
+                "statusMsg": "已发布"
+            },
+            "viewList": [
+                {
+                    "id": 1001,
+                    "name": "查看详情",
+                    "url": "/tg/itemDetail.htm?juId=10000013173571",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1004,
+                    "name": "查看团链",
+                    "url": "//detail.ju.taobao.com/home.htm?itemId=523818224972&amp;id=10000013173571",
+                    "isRequired": false,
+                    "meta": {
+                        "shorturl": "http://tb.cn/sX3Islx",
+                        "longurl": "//detail.ju.taobao.com/home.htm?itemId=523818224972&amp;id=10000013173571"
+                    }
+                }
+            ],
+            "actionList": [
+                {
+                    "id": 1007,
+                    "name": "修改信息",
+                    "url": "/tg/itemApplyFormDetail.htm?juId=10000013173571",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                },
+                {
+                    "id": 1012,
+                    "name": "营销推广",
+                    "url": "//mk.ju.taobao.com/marketing/choose_tool.htm?ju_id=10000013173571",
+                    "isRequired": false,
+                    "meta": {
+                        
+                    }
+                }
+            ]
+        }
+    ]
 }

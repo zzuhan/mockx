@@ -4,14 +4,23 @@ MockX
 
 注：里面包含了很多我们项目定制的东西在内，是基于express，外部公司慎用
 
+# 是什么
+
+是一个用来做数据映射的中间件，可理解为express的中间件。根据配置文件`mockx.js`的配置，将相应的url返回相应的json, js, 或 remote的数据。还支持方便的配合阿里巴巴中的DIP平台。
+
 # 使用
 
-简单的mockx配置文件`mockx.js`事例.配置文件是个node的组件，用module.exports输出一个数组对象。
+简单的mockx配置文件`mockx.js`事例.配置文件写法是Nodejs的CMD风格js文件，用module.exports输出一个数组对象。
+
 
 ```
+// mockx.js
 module.exports = [{
 	"route": "/api/getUserInfo",
 	"json": "mock/getuserinfo.json"
+}, {
+	"route": "",
+	"jsonp": ""
 }]
 ```
 ## Mockx配置项对象
@@ -25,6 +34,11 @@ module.exports = [{
 | jsData | 映射的js文件      |    String |
 | remote | 转发请求的url, 值填`self`表明透明转发到线上相同url     |    String |
 | jsnop | 如果是jsonp请求，url中jsonp的字段名      |    String |
+| delay/responseTime |  加入延时响应时间  |    Number |
+| dipSchema|  DIP Schema的ID  |    Number |
+| dipApp|  DIP App的ID  |    Number |
+| charset|  返回结果的charset，默认按读取的文件或remote接口的charset |  String |
+
 
 注：
 
@@ -42,6 +56,20 @@ module.exports = [{
 
 ```
 
+# 注
+
+- DIP的配置(route)不是每次都去拉取，只在第一次会拉取(性能原因)，所以如果远程有更改，需要重新启动clam
+
+# Features
+
+- delay 延时
+- DIP
+
+# 一些不太确定的点 纠结
+
+- 现在的remote被我拦截了，中间加了些处理，并不是直接把remote的原封结果返回
+- 关于charset 最终返回的charset是按照读取到的文件或者远程接口的charset还是统一utf8呢
+
 # 一些说明
 
 ## route匹配原则
@@ -52,7 +80,6 @@ module.exports = [{
 ## 文件的路径
 
 本地路径的书写格式，只支持相对路径，是相对于此项目的根目录
-
 
 # 一些常用场景
 
@@ -73,6 +100,10 @@ module.exports = [{
 }]
 
 ```
+
+# 一些问题
+
+- 
 
 
 # 策略
@@ -183,10 +214,17 @@ data的匹配中，post会覆盖query
 
 - 可以添加cookie字段，或者是trasnsparent的转发
 
-
 - 是否要加 type，因为RESTFUL的化，接口地址是一致的，通过type来区分
 
 # Change Log
+
+## [0.6.0]
+
+大改版，代码进行了重构，解决了编码问题和dip在网络不通下的问题
+
+### Added
+
+- postProcess功能
 
 ## [0.4.0]
 

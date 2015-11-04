@@ -37,7 +37,7 @@ module.exports = [
 		"route": /.*/i,
 		"host": "api.m.taobao.com",
 		"jsData": "mock/myconfig.js",
-		"priority": ""
+		"postProcess": "mock/post_process.js"
 	},
 
 	{
