@@ -1,5 +1,6 @@
 module.exports = function (req) {
 	return {
-		name: 'han'
+		name: 'han',
+		test: 'commit test'
 	}
 }
