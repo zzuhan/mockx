@@ -8,9 +8,6 @@
     "test": "test"
   },
   "dependencies": {
-    "async": "~1.5.0",
-    "dns-lookup": "0.0.2",
-    "fetch-agent": "~0.4.2",
     "iconv-lite": "~0.4.13",
     "is-utf8": "~0.2.0",
     "juicer": "~0.6.11",
