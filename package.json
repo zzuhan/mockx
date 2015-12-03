@@ -1,6 +1,6 @@
 {
   "name": "mockx",
-  "version": "0.6.1",
+  "version": "0.7.2",
   "description": "Generate random data(by mockjs tpl), middleware.Can use local, js data and fetch remote",
   "main": "index.js",
   "directories": {
@@ -8,9 +8,6 @@
     "test": "test"
   },
   "dependencies": {
-    "async": "~1.4.2",
-    "dns-lookup": "0.0.2",
-    "fetch-agent": "~0.4.1",
     "iconv-lite": "~0.4.13",
     "is-utf8": "~0.2.0",
     "juicer": "~0.6.11",
@@ -18,7 +15,7 @@
     "mkdirp": "~0.5.1",
     "mockjs": "~0.1.10",
     "plug-trace": "~0.1.5",
-    "qs": "^5.2.0",
+    "qs": "~6.0.0",
     "sync-request": "~2.0.1"
   },
   "devDependencies": {},
