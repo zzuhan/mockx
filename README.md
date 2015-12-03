@@ -28,7 +28,7 @@ module.exports = [{
 | 字段        | 描述           | 类型  |
 | ------------- |:-------------:| -----:|
 | route     | 匹配的url路径 | String|Regexp 必填 |
-| query | 匹配的query，如果填了在query也匹配时才会命中此配置  |   Object 可选 |
+| data | 匹配的get或post的数据，post字段覆盖get字段，如果填了在query也匹配时才会命中此配置  |   Object 可选 |
 | host | 匹配的host，如果填了在host也匹配时才会命中此配置  |    String 可选 |
 | json      | 映射的json文件     | String   |
 | jsData | 映射的js文件      |    String |
