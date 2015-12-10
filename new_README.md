@@ -15,3 +15,7 @@
 # 一些概念
 
 # mock.js配置文件
+
+看下面的很全的配置实例，
+
+[一个很全的配置实例](https://raw.githubusercontent.com/zzuhan/mockx/master/test/full-example-mockx.js)
