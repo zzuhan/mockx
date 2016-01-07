@@ -98,5 +98,13 @@
 			uid: '7788'
 		},
 		json: 'mock/7788.json'
+	},
+
+	// 其它mock文件
+	{
+		route: 'front/floorConfig.htm',
+		file: 'mock/floorConfig.html',
+		// 这个必填
+		fileType: 'text/html'
 	}
 ]

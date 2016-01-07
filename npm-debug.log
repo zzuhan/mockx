@@ -1,0 +1,104 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.14.4
+3 info using node@v4.1.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/hanwencheng/work/mockx',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/hanwencheng/.npm/mockx/0.8.0/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/hanwencheng/.npm/mockx/0.8.0/package.tgz',
+9 verbose tar pack   '/Users/hanwencheng/work/mockx' ]
+10 verbose tarball /Users/hanwencheng/.npm/mockx/0.8.0/package.tgz
+11 verbose folder /Users/hanwencheng/work/mockx
+12 info prepublish mockx@0.8.0
+13 verbose addLocalTarball adding from inside cache /Users/hanwencheng/.npm/mockx/0.8.0/package.tgz
+14 silly cache afterAdd mockx@0.8.0
+15 verbose afterAdd /Users/hanwencheng/.npm/mockx/0.8.0/package/package.json not in flight; writing
+16 verbose afterAdd /Users/hanwencheng/.npm/mockx/0.8.0/package/package.json written
+17 silly publish { name: 'mockx',
+17 silly publish   version: '0.8.0',
+17 silly publish   description: 'Generate random data(by mockjs tpl), middleware.Can use local, js data and fetch remote',
+17 silly publish   main: 'index.js',
+17 silly publish   directories: { example: 'example', test: 'test' },
+17 silly publish   dependencies:
+17 silly publish    { debug: '^2.2.0',
+17 silly publish      'iconv-lite': '~0.4.13',
+17 silly publish      'is-utf8': '~0.2.0',
+17 silly publish      juicer: '~0.6.11',
+17 silly publish      merge: '~1.2.0',
+17 silly publish      mkdirp: '~0.5.1',
+17 silly publish      mockjs: '~0.1.10',
+17 silly publish      'plug-trace': '~0.1.5',
+17 silly publish      qs: '~6.0.0',
+17 silly publish      'sync-request': '~2.0.1' },
+17 silly publish   devDependencies: {},
+17 silly publish   scripts: { test: 'node test/test-mock-middleware' },
+17 silly publish   repository: { type: 'git', url: 'git+https://github.com/zzuhan/mockx.git' },
+17 silly publish   keywords: [ 'mock' ],
+17 silly publish   author: { name: 'zzuhan' },
+17 silly publish   license: 'BSD',
+17 silly publish   bugs: { url: 'https://github.com/zzuhan/mockx/issues' },
+17 silly publish   homepage: 'https://github.com/zzuhan/mockx',
+17 silly publish   readme: 'MockX\n\n目前包含了 middleware, mock 两种类型\n\n注：里面包含了很多我们项目定制的东西在内，是基于express，外部公司慎用\n\n# 是什么\n\n是一个用来做数据映射的中间件，可理解为express的中间件。根据配置文件`mockx.js`的配置，将相应的url返回相应的json, js, 或 remote的数据。还支持方便的配合阿里巴巴中的DIP平台。\n\n# 使用\n\n简单的mockx配置文件`mockx.js`事例.配置文件写法是Nodejs的CMD风格js文件，用module.exports输出一个数组对象。\n\n\n```\n// mockx.js\nmodule.exports = [{\n\t"route": "/api/getUserInfo",\n\t"json": "mock/getuserinfo.json"\n}, {\n\t"route": "",\n\t"jsonp": ""\n}]\n```\n## Mockx配置项对象\n\n| 字段        | 描述           | 类型  |\n| ------------- |:-------------:| -----:|\n| route     | 匹配的url路径 | String|Regexp 必填 |\n| data | 匹配的get或post的数据，post字段覆盖get字段，如果填了在query也匹配时才会命中此配置。注:data中k-v的value必须是字符串  |   Object 可选 |\n| host | 匹配的host，如果填了在host也匹配时才会命中此配置  |    String 可选 |\n| json      | 映射的json文件     | String   |\n| jsData | 映射的js文件      |    String |\n| remote | 转发请求的url, 值填`self`表明透明转发到线上相同url     |    String |\n| jsnop | 如果是jsonp请求，url中jsonp的字段名      |    String |\n| delay/responseTime |  加入延时响应时间  |    Number |\n| dipSchema|  DIP Schema的ID  |    Number |\n| dipApp|  DIP App的ID  |    Number |\n| charset|  返回结果的charset，默认按读取的文件或remote接口的charset |  String |\n\n\n注：\n\n- 用来限制的字段有三个: `route`, `host`, `query`,  在`host``query`不填的时候，相当于是忽略，只要其他匹配就通过\n- 数据映射的字段有三个: `json`, `jsData`, `remote`\n- `jsonp` 只在 `json` 和 `jsData`时生效\n- query的匹配是部分匹配就可以通过，比如实际的query是`{uid:123, uuid:1123}` 填query`{uid:123}`就算匹配。\n\n## 实例说明\n\n```\n请求了一个url http://xxx.xxx.com/api/getUserInfo?uid=123213&jsonp=123123\n\n则 `host: xxx.xxx.com`, `route: /api/getUserInfo`, `query: {uid: 123213, jsonp:123123}` , `jsonp: jsonp`\n\n```\n\n# 注\n\n- DIP的配置(route)不是每次都去拉取，只在第一次会拉取(性能原因)，所以如果远程有更改，需要重新启动clam\n\n# Features\n\n- delay 延时\n- DIP\n\n# 一些不太确定的点 纠结\n\n- 现在的remote被我拦截了，中间加了些处理，并不是直接把remote的原封结果返回\n- 关于charset 最终返回的charset是按照读取到的文件或者远程接口的charset还是统一utf8呢\n\n# 一些说明\n\n## route匹配原则\n\n字符串 > 正则\n先出现的 > 后出现的\n\n## 文件的路径\n\n本地路径的书写格式，只支持相对路径，是相对于此项目的根目录\n\n# 一些常用场景\n\n## 场景1 只映射某域下的某个接口\n\n需求：只映射"api.xxx.com" 域下的"/getUserInfo"接口，其余都转发线上\n\n```\n[{\n\troute: /.*/i,\n\thost: \'api.xxx.com\',\n\tremote: \'self\'\n},\n{\n\troute: \'/getUserInfo\',\n\thost: \'api.xxx.com\',\n\tjson: "mock/getUserInfo.json"\n}]\n\n```\n\n# 一些问题\n\n- \n\n\n# 策略\n\nremote 场景 同域下一部分接口需要拿线上的\njsData 有一些复杂逻辑处理的\njson 固定结构的json数据，数据的值可以指定某些类型\n\nremote直接原封返回包括headers和body，其实是要做透明代理。对于请求，也要原封的使用req的headers和body\n\n关于一个http response的组成：\n\t1 headers\n\t2 body\n\n\n# mock 类库\n\n```\nrequire(\'mockx\').mock(tpl[, data]);\n\n// 基础用法\nvar userInfo = require(\'mockx\').mock({\n\t"name": "xxx",\n\t"avatar": "@image(200x200)",\n\t"age|1-100.1-10": 2,\n\t"blog": "@url"\n});\n\n// 支持模板的用法\nvar userInfo = require(\'mockx\').mock({\n\t"name": "${query.name}",\n\t"avatar": "@image(200x200)",\n\t"age|1-100.1-10": 2,\n\t"blog": "@url"\n}, {\n\tquery: {\n\t\tname: \'han\'\n\t}\n});\n\n```\n\n# middleware\n\n配合express的中间件。\n\n支持3种文件类型，json，jsData，remote\n\n## usage\n\n1. 调用middleware\n\trequire(\'mockx\')(params, confDir);\n\n2. mockx.json配置文件\n\n## mockx.json配置文件\n\n```\n路径为 confDir/mockx.js\n\nmodule.exports = [\n\t{\n\t\t"route": "/about/copyright.php",\n\t\t"data": {}\n\t\t// 如果是jsonp请求，则添加\n\t\t"jsonp": "callback",\n\t\t"json": "mock/copyright.json",\n\t\t// value前加#表示停用\n\t\t"jsData": "#mock/myconfig.js",\n\t\t"remote": "#http://baidu.com"\n\t}\n]\n\n## 前提条件\n\n假设你传的req，会经过解析成类似express的。  \nquery在req.query中  \npost的数据在req.body中。  \ndata的匹配中，post会覆盖query\n\n## jsData\n\n```\n\n# Features\n\n- 透明代理(某个域名下的接口，如api.wapa.taobao.com，新接口在开发中，需要映射到本地，但是老接口需要转发到线上)\n\tquery, headers信息都会透明转发到线上\n\n\n# 注意事项\n\n- 运行时修改或添加或删除dipSchema或dipApp都需要重新启动服务\n- \n\n# 开发计划\n\n- 关于remote\n\t流程图，设计图，remote是否直接做透明转发而不是现在做这么多处理，太麻烦了\n\n- DNS检查，如果处于\n\n- cache机制，想覆盖dipSchema的一些字段如何做？比如host写为空的\n\n- 支持DIP projectId\n\n- remote转发时，带上headers和支持POST请求\n\n- 可以添加cookie字段，或者是trasnsparent的转发\n\n- 是否要加 type，因为RESTFUL的化，接口地址是一致的，通过type来区分\n\n# Change Log\n\n## [0.6.0]\n\n大改版，代码进行了重构，解决了编码问题和dip在网络不通下的问题\n\n### Added\n\n- postProcess功能\n\n## [0.4.0]\n\n### Added\n\n- 可以设置DIP schema，自动获取相应的配置\n\n## [0.3.2]\n\n### Added\n\n- 添加了host匹配功能\n\n## [0.3.0]\n\n### Added\n\n- data匹配功能，替代之前的query匹配，同时支持了get和post方式\n\n## [0.2.0]\n\n### Changed\n\n- route和query同时支持正则和字符串\n- 配置文件从json改为node模块',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: 'ee52f7462f4bd4d4060ad4c5890c4c9b3f8618f9',
+17 silly publish   _id: 'mockx@0.8.0',
+17 silly publish   _shasum: 'c5530eb56c0e57a65c1609c6451ddf41d712560b',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name mockx
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/mockx
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /Users/hanwencheng/.npm/mockx/0.8.0/package.tgz
+25 verbose request uri https://registry.npmjs.org/mockx
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 11:37:18 AM
+28 verbose request using bearer token for auth
+29 verbose request id 56d3cc677fad9926
+30 http request PUT https://registry.npmjs.org/mockx
+31 http 403 https://registry.npmjs.org/mockx
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=300',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Thu, 24 Dec 2015 03:37:17 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-nrt6131-NRT',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1450928237.375065,VS0,VE395' }
+33 verbose request invalidating /Users/hanwencheng/.npm/registry.npmjs.org/mockx on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 0.8.0." : mockx
+35 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:263:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:251:14)
+35 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:171:14)
+35 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1073:14)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1019:12)
+36 verbose statusCode 403
+37 verbose pkgid mockx
+38 verbose cwd /Users/hanwencheng/work/mockx
+39 error Darwin 14.0.0
+40 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+41 error node v4.1.2
+42 error npm  v2.14.4
+43 error code E403
+44 error "You cannot publish over the previously published version 0.8.0." : mockx
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]
