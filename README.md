@@ -11,7 +11,6 @@ MockX
 # 使用范围
 
 
-
 # 使用
 
 简单的mockx配置文件`mockx.js`事例.配置文件写法是Nodejs的CMD风格js文件，用module.exports输出一个数组对象。
