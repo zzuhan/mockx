@@ -8,6 +8,10 @@ MockX
 
 是一个用来做数据映射的中间件，可理解为express的中间件。根据配置文件`mockx.js`的配置，将相应的url返回相应的json, js, 或 remote的数据。还支持方便的配合阿里巴巴中的DIP平台。
 
+# 使用范围
+
+
+
 # 使用
 
 简单的mockx配置文件`mockx.js`事例.配置文件写法是Nodejs的CMD风格js文件，用module.exports输出一个数组对象。
