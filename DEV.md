@@ -1,9 +1,8 @@
 
 # TODO
 
-req.rawBody如何处理的问题
-plug-base为什么不加bodyParser.json
-我的插入拦截body会跟plug-base的multer有冲突
+- 在家的时候，mockx的DIP会有问题，会一直请求
+- 开启debug模式时，将转发remote请求的headers和rawBody都write到一个文件中，方便排查。
 
 # 将来
 

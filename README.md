@@ -10,6 +10,11 @@ MockX
 
 # 使用范围
 
+# DEBUG
+
+```
+sudo 'DEBUG=mockx:*' gulp clam
+```
 
 # 使用
 
