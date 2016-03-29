@@ -4,8 +4,9 @@
 今天 
 
 - 如果file，自动读取，然后配上fileType
-- remote，请求自身的value, 改为'original'
+-[x] remote，请求自身的value, 改为'original'
 - mtop这种有特征的，可以直接为其添加其它url映射到'original'。或者作为mockx的default配置，公司这些接口域名，直接映射到'original'
+	默认一些route，自动映射回去，如何让用户知道呢，填到用户的`mockx.js`中吗？
 - meta charset的问题 为何gbk不行
 - 良田的那个需求是什么?
 - 能否在映射中写判断语句
