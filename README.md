@@ -8,6 +8,24 @@ MockX
 
 是一个用来做数据映射的中间件，可理解为express的中间件。根据配置文件`mockx.js`的配置，将相应的url返回相应的json, js, 或 remote的数据。还支持方便的配合阿里巴巴中的DIP平台。
 
+# 开发计划 
+
+1个月 开发完成
+
+-[] 支持headers覆盖 
+-[] 一些常用的状态，如404或者301，302等支持
+-[] 支持直接写json字段，jsonContent: {success: true} {success: false, message: '这是一个错误的消息'}
+-[] 一个客户端，类似charles，方便的进行映射 
+	- 客户端，相较于charles我有什么优势 (主要在各种齐全的动态映射吗？比如jsData或者什么)
+	- 可以编写插件？比如jsData, json这几种都是插件的模式
+	- 几种mac注入代理的方式
+	- 显示所有请求
+	- 选择请求，填写相应的映射，实现
+
+低优先级的
+
+- 支持route字段是个完整的url
+
 # 使用范围
 
 # DEBUG
@@ -63,6 +81,11 @@ module.exports = [{
 则 `host: xxx.xxx.com`, `route: /api/getUserInfo`, `query: {uid: 123213, jsonp:123123}` , `jsonp: jsonp`
 
 ```
+
+# ChangeLog
+
+- 0.8.7
+	自动识别file字段添加文件的mime
 
 # 注
 
@@ -225,6 +248,10 @@ data的匹配中，post会覆盖query
 - 是否要加 type，因为RESTFUL的化，接口地址是一致的，通过type来区分
 
 # Change Log
+
+## [0.8.8]
+
+- mockjs为防止increment接着上次的递增，再调用时删除require的cache
 
 ## [0.6.0]
 

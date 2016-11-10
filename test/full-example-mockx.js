@@ -51,7 +51,8 @@
 	{
 		// route规则中，字符串 > 正则，因此'api.m.taobao.com/get/userinfo'会匹配到这个规则，而不是上面的正则设定
 		"route": "/get/userinfo",
-		"host": "api.m.taobao.com"
+		"host": "api.m.taobao.com",
+		"json": "mock/userinfo.json"
 	},
 
 	// 场景2 dip schema
@@ -150,7 +151,5 @@
 	{
 		route: 'front/floorConfig.htm',
 		file: 'mock/floorConfig.html',
-		// 这个必填
-		fileType: 'text/html'
 	}
 ]
