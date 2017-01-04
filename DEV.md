@@ -1,7 +1,12 @@
 
 # TODO
 
-
+confDir 以及 base路径等，需要重新再理一下
+容错 比如mockx.js配置文件的出错
+如何处理404，301，以及responseText 如何方便的插入 给这些提供一些方法的能力
+compileDip 只执行一次 或者检测到mockx.js文件有变化，就再次去compileDip一次
+减少参数 如修改headers，可以用 this.setHeader  header存储到this对象中
+需要传递的charset参数，能否通过别的方式来做
 
 ## 需要做的
 
