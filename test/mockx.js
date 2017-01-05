@@ -10,6 +10,12 @@ module.exports = [
 	// 	"responseTime": 500,
 	// 	"remote": "http://dip.alibaba-inc.com/api/v2/services/schema/mock/3828"
 	// },
+
+	{
+		"route": //,
+		"jsontext": "{'success': true}"
+	},
+
 	{
 		"route": /api\/getUserName\/\d+/i,
 		"jsData": "./myconfig.js"
