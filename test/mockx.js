@@ -1,4 +1,9 @@
-module.exports = [
+module.exports = {
+	domains: [],
+
+	enableDip: false,
+
+	rules: [
 	// {
 	// 	"route": "/about/copyright.php",
 	// 	"data": {
@@ -11,10 +16,10 @@ module.exports = [
 	// 	"remote": "http://dip.alibaba-inc.com/api/v2/services/schema/mock/3828"
 	// },
 
-	{
-		"route": //,
-		"jsontext": "{'success': true}"
-	},
+	// {
+	// 	"route": //,
+	// 	"jsontext": "{'success': true}"
+	// },
 
 	{
 		"route": /api\/getUserName\/\d+/i,
@@ -65,7 +70,7 @@ module.exports = [
 	{
 		"route": "/aaa.json",
 		"json": "mock/copyright.json"
-	}
-]
+	}]
+}
 
 // 

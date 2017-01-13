@@ -7,9 +7,44 @@ mtop呢？
 
 # 项目计划
 
-还剩18天了
-我来做底层的功能 compare功能 弱网环境 和server配置的同步
+还剩14天了
+我来做底层的功能 早上吧
+	compare功能 done了
+	和server配置的同步
+	代码优化  能否做到对`plug-base`无感知，引入`plug-base-wrap`，对plug-base的方法也做到隐蔽，都是直接调用Mockx的方法
+	<!-- new MockX(config) {} -->
+	可靠性 简单性 dip网络挂掉的时候，整个程序应该不会有问题
+	<!-- 如何做到完全不用重启的 -->
+	-[x] mockx.js 放到哪里，mock文件夹放到哪里，都可以简单运行起来
+	json还有jsonp的头是否要修正下，contentType这个头
+	-[] 写使用的文档
+	-[] 优化的
+		warning提示 应该有不同的颜色
+	-[] 输入正确性校验
+		用户的route是否以'/'反斜杠开头，否则是不能匹配的
+	-[] 输入性校验
+		如用户的输入
+		参数的输入校验
+	-[] pac的可行性，charles使用的是什么？
+
 线上平台 
+	web前台 
+		/project/list 项目列表页
+		/project/detail 项目详情页
+		/project/create 项目详情页
+		/api/ api编辑页
+	数据后台
+		数据helper project和api的存储
+	mock服务
+		把mockjs给搬上去就可以了，作为一个处理中间件
+	其它
+		是否提供compare服务
+		数据请求记录
+	schemas
+	服务
+		是否支持mock数据修改的记录和比对，这样就支持后端的接口做了什么修改
+
+
 	- project，api底层的存储 midway
 	- project list页面
 	- project页面 api-list
@@ -39,6 +74,75 @@ mtop呢？
 		- 通过切面，afterRequest然后做比对。再重新发送一个Bullet，同时我们可以看下我们的Bullet是否是独立的。
 		- 
 
+# 计划&优先级
+
+- fakerjs 查看，我们是否需要开放API
+- 有时候不是个项目，比如我就想突然替换线上某个url的内容为我本地的html，如何能超级快速的写进去，然后匹配替换，就想ihosts使用那样简单。是否是来个yo呢，或者把这个东西的启动搞得轻量级一些，封装起来
+- 好的错误提示，没有填写`mockx.js`这个文件呢
+- 不用重启这个很重要
+- README，可以别人查看，也可以推广出去
+- 提供给外部的mock的能力，mockjs，jsData的能力
+- api的编辑页面，把API给web化操作
+- 是否用pac模式，不修改别人的hosts
+- 最简化这个项目
+- 待加入的
+	是否支持加入某种类型，如前台的商品
+- 快速使用
+	比如anywhere 一行代码就可以了。
+	能否一行命令就创建一个环境，方便的写上规则和映射的文件。其实就是映射某个url到本地。
+
+项目这样的化能否推广出去，和dip的结合重要吗？
+
+## 最简化使用
+
+- 是使用yo快速的创建一个文件夹结构呢？如何创建一个文件夹结构
+	- 使用git clone下来gitlab上的一个仓库，但是
+- 还是使用简单的界面化的工具实现呢呢？
+
+# 卖点
+
+完全无侵入的
+上线不需要做任何修改
+动态数据，mockjs 或是 js逻辑 甚至是一个html
+可修改header，模拟404，301等特殊情况，可以修改cookie
+模拟特殊场景，相应延时, jsonp
+支持https, http
+
+# 数据结构 
+
+```
+project
+{
+	id: 1,
+	name: '项目的名字',
+	description: '项目的描述',
+	apis: [1,2,3]
+}
+
+api
+{
+	id: 1-1,
+	<!-- 还能回到project中去 -->
+	parent: 1,
+	name: '用户信息接口',
+	description: '用户信息的介绍',
+	config: {
+		route: ,
+		host: ,
+		jsData: ,
+		json: 
+	}
+}
+
+```
+
+# 服务端mock功能
+
+- /mock?id=1133 拿到了 req, 还有服务端的配置
+- 服务端如果有img等文件的匹配怎么办，暂时只需要html和json, 还有jsData ()
+- file json jsData 这三种类型
+- mockx 如何在服务端跑起来 只需要调用bullet就可以了
+- bullet req, res(需要吗), string, callback 提供一个简单的工具版本吧 只关心 this.req, string, callback就可以了 
 
 # 哪几大项
 
@@ -69,6 +173,9 @@ mtop呢？
 	本地server 做proxy 转发
 	线上平台 做接口管理 数据的mock 
 
+## 功能compare
+
+- 数组的不一致就比比较了把，这个有点
 
 # TODO
 
@@ -83,7 +190,6 @@ mtop呢？
 	和DIP的打通，
 	弱网环境 
 - 需要考虑能在家里离线使用
-
 - confDir 以及 base路径等，需要重新再理一下
 - 容错 比如mockx.js配置文件的出错
 
@@ -91,14 +197,16 @@ mtop呢？
 
 - 如何处理404，301，以及responseText 如何方便的插入 给这些提供一些方法的能力
 
-
 优化：
-
 
 - 需要传递的charset，header参数，能否通过别的方式来做
 - route匹配上是否更方便呢？
 - 减少参数 如修改headers，可以用 this.setHeader  header存储到this对象中
 - compileDip 只执行一次 或者检测到mockx.js文件有变化，就再次去compileDip一次
+
+## 如何最简化这个项目呢
+
+-
 
 ## 需要做的
 
@@ -170,6 +278,13 @@ mockx 客户端，专门做数据的mock功能
 	测试同学有什么需求吗？
 
 - 中间有过修改的自动同步
+	
 
 - 上线阶段
 	
+# 本周的工作
+
+- 微淘的账号
+- 魔盒 图片上传
+- 拖带的功能
+- 量饭团规格

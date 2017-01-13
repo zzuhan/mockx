@@ -8,25 +8,56 @@ MockX
 
 是一个用来做数据映射的中间件，可理解为express的中间件。根据配置文件`mockx.js`的配置，将相应的url返回相应的json, js, 或 remote的数据。还支持方便的配合阿里巴巴中的DIP平台。
 
-# 开发计划 
+# 哪些特色
 
-1个月 开发完成
+- proxy功能
+	- http https支持
+- 数据mock
+	- mockjs 
+	- 多种响应类型 json jsontext jsdata http remote
+	- 可以配合dip
+	- 修改返回头
+	- 辅助方法 响应延时
+- 平台化
+	- 支持数据的共享
+- 数据compare
+	- mock数据和线上真实数据比对
 
--[] 支持headers覆盖 
--[] 一些常用的状态，如404或者301，302等支持
--[] 支持直接写json字段，jsonContent: {success: true} {success: false, message: '这是一个错误的消息'}
--[] 一个客户端，类似charles，方便的进行映射 
-	- 客户端，相较于charles我有什么优势 (主要在各种齐全的动态映射吗？比如jsData或者什么)
-	- 可以编写插件？比如jsData, json这几种都是插件的模式
-	- 几种mac注入代理的方式
-	- 显示所有请求
-	- 选择请求，填写相应的映射，实现
+# 配置字段
 
-低优先级的
+## 全局的
 
-- 支持route字段是个完整的url
+| 字段        | 描述           | 类型  |
+| ------------- |:-------------:| -----:|
 
-# 使用范围
+## request支持
+
+| 字段        | 描述           | 类型  |
+| ------------- |:-------------:| -----:|
+| route     | 匹配的url路径 | String|Regexp 必填 |
+| data | 匹配的get或post的数据，post字段覆盖get字段，如果填了在query也匹配时才会命中此配置。注:data中k-v的value必须是字符串  |   Object 可选 |
+| host | 匹配的host，如果填了在host也匹配时才会命中此配置  |    String 可选 |
+
+## response支持
+
+| 字段        | 描述           | 类型  |
+| ------------- |:-------------:| -----:|
+| json      | 映射的json文件     | String   |
+| jsontext  | 映射的json字符串    | String   |
+| jsdata | 映射的js文件      |    String |
+| http | 返回http的状态      |    Object |
+| remote | 转发请求的url, 值填`self`表明透明转发到线上相同url     |    String |
+| dipSchema|  DIP Schema的ID  |    Number |
+| dipApp|  DIP App的ID  |    Number |
+| headers |  支持headr |  String |
+| charset|  返回结果的charset，默认按读取的文件或remote接口的charset |  String |
+| jsnop | 如果是jsonp请求，url中jsonp的字段名      |    String |
+
+## helper 
+
+| 字段        | 描述           | 类型  |
+| ------------- |:-------------:| -----:|
+| delay/responseTime |  加入延时响应时间  | Number |
 
 # DEBUG
 
@@ -49,6 +80,7 @@ module.exports = [{
 	"jsonp": ""
 }]
 ```
+
 ## Mockx配置项对象
 
 | 字段        | 描述           | 类型  |
