@@ -8,7 +8,7 @@ var cwd = process.cwd();
 var path = require('path');
 const exec = require('child_process').exec;
 
-var config = require(path.join(cwd, './mockx.js'));
+var config = require(path.join(cwd, '.config/mockx.js'));
 
 var fs = require('fs');
 
@@ -25,13 +25,13 @@ function genHosts(domains){
 
 	var hostsCode = '{"127.0.0.1": ["' +  domains.join('","') + '"] }';
 
-	fs.writeFileSync(path.join(cwd,'./flex-hosts.json'), hostsCode);
+	fs.writeFileSync(path.join(cwd, '.config/flex-hosts.json'), hostsCode);
 }
 
 function runServer(){
 	// var serverProcess = exec('sudo node serve.js');
 	// serverProcess.stdout.pipe(process.stdout);
-	var config_dir = "./";
+	var config_dir = "./.config";
 	var server = require("plug-base");
 	server.root("src"); server.config(config_dir);
 
@@ -40,7 +40,3 @@ function runServer(){
 }
 
 run();
-
-
-
-
