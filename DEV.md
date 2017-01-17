@@ -33,6 +33,23 @@ mtop呢？
 		/project/detail 项目详情页
 		/project/create 项目详情页
 		/api/ api编辑页
+	接口
+		项目列表 /project/list
+		项目创建 /project/create
+		项目详情 /project/detail
+```
+{
+	name: ,
+	description: ,
+	apiIds: []
+}
+```
+		api编辑  /api/save
+```
+{
+		
+}
+```
 	数据后台
 		数据helper project和api的存储
 	mock服务
@@ -43,8 +60,10 @@ mtop呢？
 	schemas
 	服务
 		是否支持mock数据修改的记录和比对，这样就支持后端的接口做了什么修改
+	api编辑页
+		保存时输出一段json是关于这个接口的
 
-
+	
 	- project，api底层的存储 midway
 	- project list页面
 	- project页面 api-list
@@ -79,7 +98,7 @@ mtop呢？
 - 再需要进入.config目录不合适哇 
 - **提供一个客户端的？很方便的使用，即下即用 web页面的形式编辑**
 - 这个web编辑页面同时也是将来自己的平台也需要的
-
+- JSON.stringify的时候，正则有问题
 
 # 计划&优先级
 

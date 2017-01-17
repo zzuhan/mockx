@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>这个是API页面</title>
+	<link rel="stylesheet" type="text/css" href="./jui.css">
+	<!-- 先从最常用的页面写起来，即最需要的route, host字段写起来 -->
+	<!-- response remote json -->
+</head>
+<body>
+	<div class="container  " id="apiEditor">
+		<h1>API编辑器</h1>
+
+		<!-- request的字段 route host -->
+		
+
+		<!-- response json headers jsonp -->
+		<!-- 从几种里面选一种 -->
+		
+		<!-- helper -->
+		<!-- delay -->
+
+		<!-- 有几种模式的可以直接塞入 -->
+	<div class="formContainer border p20">
+		<p>
+			<label for="">route</label> <input type="text" name="route" v-model="route"> 
+		</p>
+		<p>
+			<label for="">host</label> <input type="text"  name="host" v-model="host">
+		</p>
+
+		<input type="radio" name="type" value="json" v-model="responseType"> json
+		<input type="radio" name="type" value="jsdata" v-model="responseType"> jsdata
+		<input type="radio" name="type" value="file" v-model="responseType"> file
+		<input type="radio" name="type" value="remote" v-model="responseType"> remote
+		
+		<p v-show="responseType == 'json'">
+			<label for="">json</label><input type="text" v-model="json">
+		</p>
+
+		<p v-show="responseType == 'jsdata'">
+			<label for="">jsdata</label><input type="text" v-model="jsdata">
+		</p>
+		
+		<p v-show="responseType == 'file'">
+			<label for="">file</label><input type="text" v-model="file">
+		</p>
+
+		<p v-show="responseType == 'remote'">
+			<label for="">remote</label><input type="text" v-model="remote">
+		</p>
+		
+		<p>
+			<label for="">headers</label><input type="text"  v-model="headers">
+		</p>
+
+		<p>
+			<label for="">jsonp</label><input type="checkbox" name="jsonp">
+		</p>
+		
+		<p>	
+			<label for="delay">delay</label><input type="text" name="delay" v-model="delay">
+		</p>
+	
+		<p>
+			<textarea id="output">{{output}}</textarea>
+		</p>	
+
+		<a href="javascript:;" class="btn btn-important" v-on:click="doSave">创建</a>
+		<a href="javascript:;" class="btn btn-important" v-on:click="doSave">保存</a>
+
+	</div>
+
+</div>
+	
+	<script src="./vue.js"></script>
+	<!-- 使用vue来编写把 -->
+	<script type="text/javascript">
+		// vue实例
+		var vueInstance = new Vue({
+			el: '#apiEditor',
+			data: {
+				route: '/search',
+				host: 's.taobao.com',
+				responseType: 'json',
+				json: '',
+				file: '',
+				jsdata: '',
+				remote: '',
+				headers: '',
+				jsonp: false,
+				delay: 100,
+				output: '',
+				id: -1
+			},
+			methods: {
+				doSave: function () {
+					var rule = this.buildRule();
+					this.saveRule(rule);
+				},
+
+				buildRule: function () {
+					var rule = {};
+					rule.route = this.route;
+					rule.host = this.host;
+					rule.responseType = this.responseType;
+					rule[this.responseType] = this[this.responseType];
+					rule[this.jsonp] = this[this.jsonp];
+
+					this.output = JSON.stringify(rule);
+				},
+
+				// 保存
+				// 保存按钮 动态的有... 成功后有显示
+				saveRule: function (rule) {
+					this.request(this.saveApi, {
+						id: this.id,
+						rule: rule
+					});
+				}
+
+			}
+		});
+		
+	</script>
+</body>
+</html>
