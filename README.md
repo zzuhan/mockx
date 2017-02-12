@@ -74,6 +74,7 @@ rules的字段，主要是几类字段组成的，request类，response类还有
 | json      | 映射的json文件     | String   |
 | jsontext  | 映射的json字符串    | String   |
 | jsdata | 映射的js文件      |    String |
+| file | 映射的文件(可以是html，图片等) | String |
 | http | 返回http的状态      |    Object |
 | remote | 转发请求的url, 值填`self`表明透明转发到线上相同url     |    String |
 | dipSchema|  DIP Schema的ID  |    Number |
