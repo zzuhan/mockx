@@ -39,11 +39,12 @@ var MockMiddleware = require('../index');
 
 // route被正则命中
 var req = {
-	url: '/operate/xxx.json',
+	url: '/diff/list',
 	query: {
 		age: -1,
 		name: 'han',
-		callback: 'mtop5'
+		callback: 'mtop5',
+		path: 'freeway.ju.daily.taobao.net/message/queryMessageDetail.do'
 	},
 	body: '',
 	connection: {
