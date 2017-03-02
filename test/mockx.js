@@ -1,9 +1,9 @@
-
-
 module.exports = {
 	domains: [],
 
 	enableDip: false,
+
+	projectIds: [4],
 
 	rules: [
 	// {
@@ -31,12 +31,12 @@ module.exports = {
 	// 	"route": "/about/copyright.php",
 	// 	"remote": "http://dip.alibaba-inc.com/api/v2/services/schema/mock/3828"
 	// },
-	// {
-	// 	"dipSchema": 4879,
-	// },
-	// {
-	// 	"dipApp": 2361,
-	// },
+	{
+		"dipSchema": 4879,
+	},
+	{
+		"dipApp": 2361,
+	},
 	// 
 	
 	// api.m.taobao.com/operate/*
