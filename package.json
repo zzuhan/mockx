@@ -1,6 +1,6 @@
 {
   "name": "mockx",
-  "version": "0.9.8",
+  "version": "0.9.82",
   "description": "Generate random data(by mockjs tpl), middleware.Can use local, js data and fetch remote",
   "main": "index.js",
   "directories": {
@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/zzuhan/mockx/issues"
   },
-  "homepage": "https://github.com/zzuhan/mockx"
+  "homepage": "https://github.com/zzuhan/mockx",
+  "devDependencies": {
+    "request": "^2.80.0"
+  }
 }

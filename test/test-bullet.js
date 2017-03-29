@@ -1,8 +1,4 @@
-
-
-
 console.log('/api/100000/opera'.match(/\/api\/(\d{5,10})\/(.+)/i));
-
 
 var MockBullet = require('../lib/bullet');
 
@@ -126,5 +122,6 @@ function testRemote(){
 	new MockBullet(req, res, rule, param, callback);
 
 }
+
 
 testReg();
