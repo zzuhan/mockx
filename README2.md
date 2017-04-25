@@ -83,7 +83,7 @@ module.exports = [{
 
 ## Mockx配置项对象
 
-| 字段        | 描述           | 类型  |
+| 字段        | 描述           | 类型  | 
 | ------------- |:-------------:| -----:|
 | route     | 匹配的url路径 | String|Regexp 必填 |
 | data | 匹配的get或post的数据，post字段覆盖get字段，如果填了在query也匹配时才会命中此配置。注:data中k-v的value必须是字符串  |   Object 可选 |
