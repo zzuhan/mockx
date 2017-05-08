@@ -7,17 +7,35 @@
 var cwd = process.cwd();
 var path = require('path');
 const exec = require('child_process').exec;
+var fs = require('fs-extra');
 
-var config = require(path.join(cwd, '.config/mockx.js'));
-
-var fs = require('fs');
+var confFile = path.join(cwd, 'mockx.config.js');
+var mockxCacheDir = path.join(cwd, ".mockx");
 
 // 1 生成一份flex-hosts写入
 // 2 生成一份脚本，
 
-function run(){
+function init(){
+	console.log(confFile);
+
+	ensureConfig();
+	var config = require(confFile);
+
+	ensureDirs();
+
 	genHosts(config.domains);
 	runServer();
+}
+
+function ensureConfig(){
+  	if (!fs.existsSync(confFile)) {
+	    fs.writeFileSync(confFile, fs.readFileSync(path.join(__dirname, "../lib/mockx-default.js")));
+    	fs.chmod(confFile, 0777);
+  	}
+}
+
+function ensureDirs(){
+	fs.ensureDirSync(mockxCacheDir);
 }
 
 function genHosts(domains){
@@ -25,18 +43,17 @@ function genHosts(domains){
 
 	var hostsCode = '{"127.0.0.1": ["' +  domains.join('","') + '"] }';
 
-	fs.writeFileSync(path.join(cwd, '.config/flex-hosts.json'), hostsCode);
+	fs.writeFileSync(path.join(mockxCacheDir + '/flex-hosts.json'), hostsCode);
 }
 
 function runServer(){
 	// var serverProcess = exec('sudo node serve.js');
 	// serverProcess.stdout.pipe(process.stdout);
-	var config_dir = "./.config";
 	var server = require("plug-base");
-	server.root("src"); server.config(config_dir);
+	server.root("src"); server.config(mockxCacheDir);
 
-	var mockx = require("mockx");
+	var mockx = require("../index")(confFile);
 	server.plug(mockx).listen(80, 443);
 }
 
-run();
+init();

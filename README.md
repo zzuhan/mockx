@@ -4,6 +4,10 @@
 
 例如 `www.taobao.com/api/xxx` 这样的一个接口，后端还没开发好，这时你可以通过mockx把这个接口的返回指向本地的一个 xxx.json文件。mockx通过你手动编写规则的形式实现。
 
+# API
+
+[API](https://github.com/zzuhan/mockx/blob/master/usage.md)
+
 # 使用
 
 两类，一种中间件一种是本地本地起一个完整服务。
@@ -24,7 +28,7 @@
 
 # 规则文件 mockx.js
 
-```
+```json
 // mockx.js
 module.exports = {
 	"domains": [],
