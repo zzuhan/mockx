@@ -12,31 +12,39 @@ module.exports = {
 	domains: [
 		"freeway.ju.taobao.com"
 	],
+
 	projectIds: [],
+
 	// 相对项目根目录下的mock文件夹
 	mockDir: './mock',
+
 	// 所有的映射规则，详见后面rule编写规则
 	rules: [
+	
 	// 映射本地json
 	{
 		route: '/mockJSON',
-    	json: 'jsonfile.json'
+		json: 'jsonfile.json'
 	}, 
+
 	// 映射本地js逻辑返回动态内容
 	{
 		route: '/mockJSData',
 		jsData: 'jsData.js'
 	}, 
+
 	// 映射本地的静态文件
 	{
 		route: '/mockFile',
 		file: 'file.html' // file静态资源，可以是js，css，html
 	}, 
+
 	// 映射一个远程的内容
 	{
 		route: '/mockRemote',
 		remote: 'http://www.taobao.com' // remote需要写全，把协议http:带上
 	}, 
+
 	// 映射一个jsonp
 	{
 		route: '/mockJSONP',
@@ -44,19 +52,23 @@ module.exports = {
 		// 这个是 
 		jsonp: 'callback'
 	}, 
+
 	// dipSchema
 	{
 		dipSchema: 59002
 	}, 
+
 	// dipApp
 	{
 		dipApp: 2313
 	}, 
+
 	// 正则匹配，通过匹配多个url
 	{
 		route: /\/api\/message\/(.*)/i,
 		json: 'message/$1.json' // $1即上面正则匹配的$1
 	},
+
 	// 下面两个规则 1 映射单一接口，剩余的全部再转发到线上
 	{
 		route: '/ju/seal/app.js',
