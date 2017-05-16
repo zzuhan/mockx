@@ -1,137 +1,320 @@
 # 是什么
 
-类似charles的本地http,https反向代理工具。
+本地的资源代理工具
 
-例如 `www.taobao.com/api/xxx` 这样的一个接口，后端还没开发好，这时你可以通过mockx把这个接口的返回指向本地的一个 xxx.json文件。mockx通过你手动编写规则的形式实现。
+# example
 
-# API
+1 根目录下创建`mockx.config.js`
 
-[API](https://github.com/zzuhan/mockx/blob/master/usage.md)
-
-# 使用
-
-两类，一种中间件一种是本地本地起一个完整服务。
-
-- 中间件：node中间件
-- 本地起服务：[mockx-generator](https://github.com/zzuhan/mockx-generator) | 客户端(其实是对mockx-generator的封装)
-
-安装好之后，再配合编写规则文件mockx.js就可以实现你想要的映射了。
-
-
-# features
-
-- http/https proxy
-- json映射时时支持mockjs
-- 支持数据对比
-- 云平台，映射共享
-
-
-# 规则文件 mockx.js
-
-```json
-// mockx.js
+```
 module.exports = {
-	"domains": [],
-	"projectIds": [],
-	"rules": [{
+	// 填写要转发的域名，默认只跑在80端口，即使用localhost访问
+	domains: [
+		"freeway.ju.taobao.com"
+	],
+	projectIds: [],
+	// 相对项目根目录下的mock文件夹
+	mockDir: './mock',
+	// 所有的映射规则，详见后面rule编写规则
+	rules: [
+	{
 		route: '/mockJSON',
-		json: 'jsonfile.json'
-	}, {
+    	json: 'jsonfile.json'
+	}, 
+	{
+		route: '/mockJSData',
+		jsData: 'jsData.js'
+	}, 
+	{
 		route: '/mockFile',
+		<!-- file静态资源，可以是js，css，html -->
 		file: 'file.html'
-	}, {
-		route: '/mockJsData',
-		jsdata: 'jsdata.js'
-	}],
-	// "compare": true,
-	"mockDir": "../mock"
+	}, 
+	{
+		route: '/mockRemote',
+		<!-- remote需要写全，把协议http:带上 -->
+		remote: 'http://www.taobao.com'
+	}, 
+	{
+		route: '/mockJSONP',
+		json: 'jsonfile.json',
+		<!-- 这个是 -->
+		jsonp: 'callback'
+	}, 
+	{
+		dipSchema: 59002
+	}, 
+	{
+		dipApp: 2313
+	}, 
+	<!-- route正则支持 -->
+	{
+		route: /\/api\/message\/(.*)/i,
+		<!-- $1即上面正则匹配的$1 -->
+		json: 'message/$1.json'
+	},
+	<!-- 下面两个规则 1 映射单一接口，剩余的全部再转发到线上 -->
+	{
+		route: '/ju/seal/app.js',
+		host: 'g.alicdn.com'
+		remote: 'http://localhost:8000/app.js'
+	}
+	<!-- 2 剩余的接口原封转发  -->
+	{
+		route: /.*/,
+		host: 'g.alicdn.com',
+		remote: 'origin'
+	}]
 }
+
 ```
 
-| 字段        | 描述           | 类型  |
-| ------------- |:-------------:| -----:|
-| domains | 需要反代的域名 | Array |
-| projectIds | mock平台的projectId |   Array |
-| mockDir | 相对的mock文件夹 | String |
-| rules | 最重要的你要映射的规则 | Array |
+2 根目录下执行
 
-## rules中字段的含义
+`node_modules/.bin/mockx`
 
-rules对象，主要是几种类型字段组成的，request类，response类还有helper类
+3 访问
 
-## request类
+`http://localhost/getJSON`或`freeway.ju.taobao.com/getJSON`都将返回jsonfile.json内容
+
+# mockx.config.js说明
+
+## domains
+
+需要映射的域名
+
+## rules
+
+所有的映射规则，下面会有rule的详细说明
+
+## mockDir
+
+mock的文件夹
+
+# rule说明
+
+## 请求匹配
+
+`host` `data` `route` 字段
+
+## json
+
+映射json文件
+
+访问 `localhost/mockJSON`
+
+## file
+
+映射静态文件
+
+`localhost/mockFile`
+
+## remote 
+
+映射某url地址
+
+`localhost/mockRemote`
+
+## jsdata
+
+js逻辑动态输出内容
+
+## jsonp
+
+访问`/mockJSONP?callback=abc123`
+
+## 正则
+
+访问`/api/message/create` 会访问本地`/mock/message/create.json
+
+## 映射某一单一的接口
+
+## dipApp
+
+## dipSchema
+
+# 启动
+
+1 安装mockx
+
+`npm install mockx 
+
+2 启动mockx
+
+在项目根目录下执行
+
+`node_modules/.bin/mockx`
+
+初次会自动创建一个mockx.config.js即配置文件。
+
+# 分割线
+
+----------------------------------------------------------------------
+
+后面的文档暂时还未写好
+
+# 如何写mockx.config.js
+
+```
+module.exports = {
+  // 填写要转发的域名
+  domains: [
+    
+  ],
+  projectIds: [],
+  // 相对项目根目录下的mock文件夹
+  mockDir: './mock',
+  // 所有的映射规则
+  rules: [{
+    route: '/mockJSON',
+    json: 'jsonfile.json'
+  },{
+    "route": "/product/getCorpProducts.do",
+    "data": {
+      "mainProductId": "4"
+    },
+    "json": "getCorpProducts.json"
+  }]
+}
+
+```
+
+尝试访问`localhost/mockJSON` 会读取`项目根目录/mock/jsonfile.json`文件。
+
+# rule规则
 
 | 字段        | 描述           | 类型  |
 | ------------- |:-------------:| -----:|
 | route     | 匹配的url路径 | String|Regexp 必填 |
+| url| 完整的url |  String | 
 | data | 匹配的get或post的数据，post字段覆盖get字段，如果填了在query也匹配时才会命中此配置。注:data中k-v的value必须是字符串  |   Object 可选 |
 | host | 匹配的host，如果填了在host也匹配时才会命中此配置  |    String 可选 |
-
-## response类
-
-| 字段        | 描述           | 类型  |
-| ------------- |:-------------:| -----:|
 | json      | 映射的json文件     | String   |
-| jsontext  | 映射的json字符串    | String   |
-| jsdata | 映射的js文件      |    String |
-| file | 映射的文件(可以是html，图片等) | String |
-| http | 返回http的状态      |    Object |
+| jsData | 映射的js文件      |    String |
 | remote | 转发请求的url, 值填`self`表明透明转发到线上相同url     |    String |
+| jsnop | 如果是jsonp请求，url中jsonp的字段名      |    String |
+| delay/responseTime |  加入延时响应时间  |    Number |
 | dipSchema|  DIP Schema的ID  |    Number |
 | dipApp|  DIP App的ID  |    Number |
-| headers |  支持headr |  String |
-| charset|  返回结果的charset，默认按读取的文件或remote接口的charset |  String |
-| jsnop | 如果是jsonp请求，url中jsonp的字段名      |    String |
+| charset| 返回结果的charset，默认按读取的文件或remote接口的charset |  String |
 
-## helper类 
+# 规则的编写
 
-| 字段        | 描述           | 类型  |
-| ------------- |:-------------:| -----:|
-| delay/responseTime |  加入延时响应时间  | Number |
+可分为三部分，匹配规则，响应规则和辅助的
 
-# 一个完整的案例
+## 匹配规则
+
+匹配规则只需部分匹配即可，route是必填的，如果你需要更精确的就填写准确一点。
+
+遵循[nodejs url objects](https://nodejs.org/api/url.html#url_url_strings_and_url_objects)
+
+- url 即完整的
+- route 支持正则 即pathname
+- host 即host
+- data 即query部分，不过是个object
+
+例如
+
+`http://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash`
+```
+{
+	"url": "http://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash",
+	"route": "/p/a/t/h",
+	"host": "sub.host.com:8080",
+	"data": {
+		"query": "string"
+	}
+}
 
 ```
-	"domains": [],
-	"projectIds": [],
-	"rules": [{
-		route: '/search',	
-		host: 'www.taobao.com',
-		data: {"q": "中文"},
-		json: 'search.json',
-		headers: {
-			cookie: {
-				"id": "12312"
-			}
-		}
-	}],
-	// "compare": true,
-	"mockDir": "../mock"
+
+## 响应规则
+
+json
+file
+jsData
+
+## 辅助的
+
+请求头
+响应头
+延时
+jsonp
+delay
+
+# 常见的场景
+
+某个接口未开发好，映射到本地测试，其余的仍然代理到线上
+```
+<!-- serch接口代理到本地 -->
+{
+	"route": "search",
+	"json": "search.json"
+},
+<!-- 其余的代理到线上, origin特指原封不动的转发到线上 -->
+{
+	route: /.*/,
+	remote: 'origin'
+}
+
+```
+
+将/api/message全部代理到本地的message目录，其余扔走线上，正则匹配，$1即是上面匹配的括号
+```
+{
+	"route": /api\/message/(.*),
+	"json": "$1.json"
+}, 
+{
+	route: /.*/,
+	remote: 'origin'
+}
+
 ```
 
 
+# 带注释的example
 
-# 开发过程中遇到的一些问题
+`http://www.taobao.com/search?key=aaa`
 
-基础问题
+{
+	<!-- 用来匹配的项 -->
+	"url": "http://www.taobao.com/search?key=aaa",
+	<!-- 支持正则 -->
+	"route": "/search", 
+	<!-- 请求的数据 -->
+	"data": {
+		"key": "aaa"
+	},
+	<!-- 域 -->
+	"host": "www.taobao.com",
+	<!-- json文件 -->
+	"json": "search.json",
+	<!-- 动态的js -->
+	"jsData": "search.js",
+	<!-- 远程的一个地址，origin则会透明转发 -->
+	"remote": "http://www.tmall.com/search?key=aaa",
+	<!-- 如果是jsonp -->
+	"jsonp": true,
+	<!-- 延时 -->
+	"delay": 1000,
+	<!-- 响应的头 -->
+	"headers": {
+		"Access-Control-Allow-Origin": "*"
+	}
+	<!-- 请求的头 -->
+	"requestHeaders": {
+		"cookie": "NID=102=W21YoOeFkN6ndgJ_ZPQfa12YpMYdLm8Oxcy_QBg5zyQILhQDDhWdWMFBeyzZQmo8FsuykQNCJezRN_WfJ9m9e644dkd9_nH1yVbk2B9LvhL8hYpufpYe39VFvfcKHBa6DzTKKeije1Adlrrf3nw36LMPkDrYA1e1xG4lV4Inr05TCzIzQ6VJcTKudZtY27Kp; DV=UtKgBvHhB6IVLh52YHJ4EGP2UPZItwI; UULE=a+cm9sZToxIHByb2R1Y2VyOjEyIHByb3ZlbmFuY2U6NiB0aW1lc3RhbXA6MTQ5MzExMzE4ODQwOTAwMCBsYXRsbmd7bGF0aXR1ZGVfZTc6MzAyODE4MDY0IGxvbmdpdHVkZV9lNzoxMjAwMTkwNjEyfSByYWRpdXM6MTA3MjYw"
+	}
+}
 
-- 开发过程中，后端还没开发好的某个接口
-- 线上的某个html页面，你想插入一个脚本或修改某段代码做调试
-- 接口的返回内容从写好的dip平台拉取
 
-下面是高级mock功能
+# 文档
 
-- 需要模拟大数据量的数据，并且每个数据又不太一样。
-- 返回的结果跟请求的request参数有关
+想象是一个完全无知的用户，会遇到哪些问题？如何
 
-下面是compare功能
+先介绍清楚是什么东西，anyproxy是什么？一个npm包？帮助解决代理问题。
 
-- 后端开发好接口后，因为后端的接口跟你本地mock的数据，稍有差异，导致你的页面运行不起来。
+mockx 本地http代理服务器
 
-共享平台(还在开发中)
-
-- 可以后端来写proxy的规则
-- 后端数据接口设计有变动，他可以直接来修改相应的数据，并且前端可以看到修改的记录和比对。
-
-
-
+快速创建本地代理服务器 
