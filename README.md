@@ -110,7 +110,7 @@ mock的文件夹
 
 ## 请求匹配
 
-`host` `data` `route` 字段
+`host` `data` `route` `url` 字段
 
 ## json
 
