@@ -8,6 +8,8 @@ var cwd = process.cwd();
 var path = require('path');
 const exec = require('child_process').exec;
 var fs = require('fs-extra');
+var async = require('async');
+var dns = require('dns');
 
 var confFile = path.join(cwd, 'mockx.config.js');
 var mockxCacheDir = path.join(cwd, ".mockx");
@@ -24,7 +26,10 @@ function init(){
 	ensureDirs();
 
 	genHosts(config.domains);
-	runServer();
+	// 先获取到所有的domains的hosts再启动
+	lookupDns(config.domains, function(hosts) {
+		runServer(hosts);
+	});
 }
 
 function ensureConfig(){
@@ -46,13 +51,36 @@ function genHosts(domains){
 	fs.writeFileSync(path.join(mockxCacheDir + '/flex-hosts.json'), hostsCode);
 }
 
-function runServer(){
-	// var serverProcess = exec('sudo node serve.js');
-	// serverProcess.stdout.pipe(process.stdout);
+function lookupDns(domains, callback){
+	var dnsLookups = [];
+	var hosts = {};
+
+	domains.forEach(function(domain) {
+		dnsLookups.push(function(callback) {
+		  dns.lookup(domain, 4, function(err, address, family) {
+		    callback(err, address)
+		  })
+		})
+	});
+
+	async.parallel(dnsLookups, function(err, results) {
+		if(!err) {
+			domains.forEach(function(domain, index) {
+				hosts[domain] = results[index]
+			});
+			callback(hosts);
+		} else {
+			console.log("can't start", err);
+		}
+	})
+}
+
+function runServer(hosts){
+	var mockx = require("../index")(confFile, hosts);
+	
 	var server = require("plug-base");
 	server.root("src"); server.config(mockxCacheDir);
 
-	var mockx = require("../index")(confFile);
 	server.plug(mockx).listen(80, 443);
 }
 

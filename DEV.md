@@ -1,3 +1,105 @@
+
+# 第一阶段 完善好用的本地功能
+
+- 完善的文档，想想如何写一份公开对外的文档 -> mockx我自己的定位呢，到底是什么呢？
+- 插件功能？如果别人的静态资源也有特殊的需求，方案呢？anyproxy的插入方式
+	还有可能有特殊的字段需求，比如现在的json, jsdata，想插入一个新的处理逻辑呢
+- pac代理？(可选的方式，如果本地有代理工具，就使用pac代理呢) 作为一个可附加的功能吧 暂时不作为一个必须项
+	除了会跟本地代理有冲突外，还有其他缺点吗？这些功能都能实现吗？
+- flex-hosts用的resolve真的不方便 可以使用pac解决掉 或者还是改成dns.lookup ** 自己用dns.lookup去取到所有的domains配置吧
+- 更好用的API是怎么样的？projectIds我现在可以隐匿掉
+
+优化
+
+- combo功能，更好看的控制台输出
+
+- 是否有一个根据当前的url，可以选择添加一条规则，很方便，类似goagentx
+- 移动端如何代理呢？
+- 测试 diff功能？(先下放)
+- web日志
+
+这两周完成
+
+# 第二阶段 平台化
+
+
+# 文档
+
+工具是什么？定位是什么样的？独立的nodejs的http代理工具
+
+use cases
+
+table of contents
+
+是什么？一般什么场景想
+核心概念 即如何应用的？理念，使用方法的讲解，解惑。让别人的大致有个认知吧 适不适用于当前的环境 
+https://github.com/nodejitsu/node-http-proxy#options
+(一般我们前端做本地开发，后端接口可能还未准备好，接口可能是`/api/message/list`但是后端接口又没做好，使用mockx，我们通过估计配置把接口`/api/message/list`映射到一个本地文件，而不是修改源代码中ajax请求的url地址) 最好能再带一个原理图呢。
+
+example
+use cases
+	webpack开发的接口mock
+		- 可以将/api/* 发送到80端口
+		- 也可以用mockx来承接，将未配置的url再代理到9112端口
+	替换线上某个html来排查bug(同时可以mock js, css等资源)
+	同时代理一批接口，正则
+	接口数据的随机mock(底层mockjs)
+	根据query返回不同内容
+	指定发送的headers或者返回的headers
+	jsonp
+	delay
+	dipApp
+	dipSchema
+
+Options 有 Note
+	domains
+	mockDir
+	rules
+
+Options.rules 有 Note
+	匹配
+
+	Note: 可以多个组合匹配
+
+	响应
+
+	Note: 只能有一个响应
+
+## 如何写好技术文档
+
+- https://www.zybuluo.com/xishuixixia/note/174299
+- https://github.com/ruanyf/document-style-guide
+- http://yunli.blog.51cto.com/831344/168352
+- https://www.zhihu.com/question/19945828
+
+# PAC
+
+- 我想代理某个域名下所有的内容
+- 我想代理某个域名下的部分内容，正则的
+- 移动端怎么整合？
+- 想想之前的goagentx的配置
+- node能否调用mac的网络设置，然后填入自动代理配置呢
+- 添加删除时，是否好管理呢？
+
+https://github.com/bannedbook/fanqiang/wiki/pacfq
+
+坏处&局限
+
+可能跟本地翻墙工具冲突
+
+好处
+
+不占用80端口
+不用flex-hosts不能发现已经在hosts中的配置
+
+
+# 插件
+
+```
+
+```
+
+
 # 参考
 
 sosoapi 接口
