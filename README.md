@@ -129,6 +129,7 @@ webpack是启动在8080端口，需要mock一些数据
 
 替换线上的某个url下内容，排查线上的bug。
 如`https://s.taobao.com/search?q=40530`
+
 ```js
 {
 	domains: ['s.taobao.com'],
@@ -158,6 +159,7 @@ webpack是启动在8080端口，需要mock一些数据
 		file: '$1.html'
 	}
 }
+```
 
 访问`/api/message/list`会映射到本地的`mock/list.json
 
@@ -167,6 +169,7 @@ json字段时，底层自动支持了mockjs，只要按mockjs的规则写json就
 
 ## query不同返回不同内容
 
+```js
 {
 	rules: [
 	{
@@ -184,11 +187,13 @@ json字段时，底层自动支持了mockjs，只要按mockjs的规则写json就
 		json: 'error.json'
 	}
 }
+```
 
 ## 指定发送的headers或者返回的headers
 
 转发到`http://taobao.com/api/message/create`服务器时headers上会带上cookie，并且返回的headers上会带上`"Access-Control-Allow-Origin`
 
+```js
 {
 	rules: [
 	{
@@ -202,6 +207,7 @@ json字段时，底层自动支持了mockjs，只要按mockjs的规则写json就
 		}
 	}
 }
+```
 
 # Options说明
 
