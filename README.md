@@ -4,7 +4,7 @@
 
 # example
 
-1 根目录下创建`mockx.config.js`
+1 项目根目录下创建`mockx.config.js`
 
 ```js
 module.exports = {
@@ -84,13 +84,151 @@ module.exports = {
 }
 ```
 
-2 根目录下执行
+2 安装执行
 
+`npm install mockx`
 `node_modules/.bin/mockx`
 
 3 访问
 
 `http://localhost/getJSON`或`freeway.ju.taobao.com/getJSON`都将返回jsonfile.json内容
+
+# 核心理念
+
+平时开发过程中必须的一环就是数据的mock，为了对代码没有侵入，mockx采用了独立服务的形式来实现。其实就是开启了一个反向代理服务器，所有的请求都走mockx服务器，根据编写的规则，mockx服务器再决定将请求转发到哪里。
+
+经过了长时间的打磨，提炼，功能已经非常丰富，满足你能想到和想不到的场景。
+
+默认是占用80端口，默认是localhost访问，如果是其他域名的，需要编写domains字段，mockx会帮助你修改/etc/hosts自动映射到mockx服务器。
+
+# use cases
+
+## webpack本地开发
+
+webpack是启动在8080端口，需要mock一些数据
+
+```js
+{
+	rules: [
+	{
+		route: '/api/message/list',
+		file: 'messageList.json'
+	},	
+	{
+		route: /.*/,
+		host: 'localhost',
+		remote: 'localhost:8080$0'
+	}]
+}
+```
+
+`localhost/index.html`会转发到`localhost:8080/index.html`
+`localhost/api/message/list`会转发到`mock/messageList.json`
+
+## 替换线上的某个url下内容
+
+替换线上的某个url下内容，排查线上的bug。
+如`https://s.taobao.com/search?q=40530`
+```js
+{
+	domains: ['s.taobao.com'],
+	rules: [
+	{
+		route: '/search',
+		file: 'search.html'
+	},	
+	{
+		route: /.*/,
+		remote: 'origin'
+	}]
+}
+```
+
+## 同时代理一批接口
+
+`/api/message/list` `/api/message/create`  `/api/message/get` 下会有一批接口
+
+使用route支持正则的特性
+
+```js
+{
+	rules: [
+	{
+		route: '/\/api\/message\/(.*)/i',
+		file: '$1.html'
+	}
+}
+
+访问`/api/message/list`会映射到本地的`mock/list.json
+
+## 接口数据的随机mock
+
+json字段时，底层自动支持了mockjs，只要按mockjs的规则写json就可以了。
+
+## query不同返回不同内容
+
+{
+	rules: [
+	{
+		route: '/api/message/create',
+		data: {
+			title: 'xxx'
+		}
+		json: 'success.json'
+	}, 
+	{
+		route: '/api/message/create',
+		data: {
+			title: 'xxxxxxxxxxxxxxxxxxxxx'
+		},
+		json: 'error.json'
+	}
+}
+
+## 指定发送的headers或者返回的headers
+
+转发到`http://taobao.com/api/message/create`服务器时headers上会带上cookie，并且返回的headers上会带上`"Access-Control-Allow-Origin`
+
+{
+	rules: [
+	{
+		route: '/\/api\/message\/(.*)/i',
+		remote: 'http://taobao.com/api/message/create'
+		"headers": {
+			"Access-Control-Allow-Origin": "*"
+		}
+		"requestHeaders": {
+			"cookie": "NID=102=W21YoOeFkN6ndgJ_ZPQfa12YpMYdLm8Oxcy_QBg5zyQILhQDDhWdWMFBeyzZQmo8FsuykQNCJezRN_WfJ9m9e644dkd9_nH1yVbk2B9LvhL8hYpufpYe39VFvfcKHBa6DzTKKeije1Adlrrf3nw36LMPkDrYA1e1xG4lV4Inr05TCzIzQ6VJcTKudZtY27Kp; DV=UtKgBvHhB6IVLh52YHJ4EGP2UPZItwI; UULE=a+cm9sZToxIHByb2R1Y2VyOjEyIHByb3ZlbmFuY2U6NiB0aW1lc3RhbXA6MTQ5MzExMzE4ODQwOTAwMCBsYXRsbmd7bGF0aXR1ZGVfZTc6MzAyODE4MDY0IGxvbmdpdHVkZV9lNzoxMjAwMTkwNjEyfSByYWRpdXM6MTA3MjYw"
+		}
+	}
+}
+
+# Options说明
+
+# Options.rule说明
+
+请求有关的字段
+
+- *route* 匹配的url路径，支持正则和字符串。
+- *url* 完整的url
+- *data* 匹配的get或post的数据，post字段覆盖get字段，如果填了在query也匹配时才会命中此配置。注:data中k-v的value必须是字符串。
+- *host* 匹配的host
+
+响应有关的字段
+
+- *json* 映射的json文件 json文件支持mockjs
+- *jsData* 映射的动态执行的js文件
+- *remote* 映射的远程资源 映射时请写全带上协议，如`http://taobao.com`
+- *file* 映射的静态文件，可以是`html`, `js`, `css`
+- *dipSchema* 
+- *dipApp*
+
+辅助的字段
+
+- *jsonp* jsonp请求，字段value是jsonp的字段名如`{jsnop: 'callback'}`
+- *delay* 延时的响应时间，毫秒单位
+
+
 
 # mockx.config.js说明
 
@@ -162,174 +300,3 @@ js逻辑动态输出内容
 
 初次会自动创建一个mockx.config.js即配置文件。
 
-# 分割线
-
-----------------------------------------------------------------------
-
-后面的文档暂时还未写好
-
-# 如何写mockx.config.js
-
-```
-module.exports = {
-  // 填写要转发的域名
-  domains: [
-    
-  ],
-  projectIds: [],
-  // 相对项目根目录下的mock文件夹
-  mockDir: './mock',
-  // 所有的映射规则
-  rules: [{
-    route: '/mockJSON',
-    json: 'jsonfile.json'
-  },{
-    "route": "/product/getCorpProducts.do",
-    "data": {
-      "mainProductId": "4"
-    },
-    "json": "getCorpProducts.json"
-  }]
-}
-
-```
-
-尝试访问`localhost/mockJSON` 会读取`项目根目录/mock/jsonfile.json`文件。
-
-# rule规则
-
-| 字段        | 描述           | 类型  |
-| ------------- |:-------------:| -----:|
-| route     | 匹配的url路径 | String|Regexp 必填 |
-| url| 完整的url |  String | 
-| data | 匹配的get或post的数据，post字段覆盖get字段，如果填了在query也匹配时才会命中此配置。注:data中k-v的value必须是字符串  |   Object 可选 |
-| host | 匹配的host，如果填了在host也匹配时才会命中此配置  |    String 可选 |
-| json      | 映射的json文件     | String   |
-| jsData | 映射的js文件      |    String |
-| remote | 转发请求的url, 值填`self`表明透明转发到线上相同url     |    String |
-| jsnop | 如果是jsonp请求，url中jsonp的字段名      |    String |
-| delay/responseTime |  加入延时响应时间  |    Number |
-| dipSchema|  DIP Schema的ID  |    Number |
-| dipApp|  DIP App的ID  |    Number |
-| charset| 返回结果的charset，默认按读取的文件或remote接口的charset |  String |
-
-# 规则的编写
-
-可分为三部分，匹配规则，响应规则和辅助的
-
-## 匹配规则
-
-匹配规则只需部分匹配即可，route是必填的，如果你需要更精确的就填写准确一点。
-
-遵循[nodejs url objects](https://nodejs.org/api/url.html#url_url_strings_and_url_objects)
-
-- url 即完整的
-- route 支持正则 即pathname
-- host 即host
-- data 即query部分，不过是个object
-
-例如
-
-`http://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash`
-```
-{
-	"url": "http://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash",
-	"route": "/p/a/t/h",
-	"host": "sub.host.com:8080",
-	"data": {
-		"query": "string"
-	}
-}
-
-```
-
-## 响应规则
-
-json
-file
-jsData
-
-## 辅助的
-
-请求头
-响应头
-延时
-jsonp
-delay
-
-# 常见的场景
-
-某个接口未开发好，映射到本地测试，其余的仍然代理到线上
-```
-<!-- serch接口代理到本地 -->
-{
-	"route": "search",
-	"json": "search.json"
-},
-<!-- 其余的代理到线上, origin特指原封不动的转发到线上 -->
-{
-	route: /.*/,
-	remote: 'origin'
-}
-
-```
-
-将/api/message全部代理到本地的message目录，其余扔走线上，正则匹配，$1即是上面匹配的括号
-```
-{
-	"route": /api\/message/(.*),
-	"json": "$1.json"
-}, 
-{
-	route: /.*/,
-	remote: 'origin'
-}
-
-```
-
-
-# 带注释的example
-
-`http://www.taobao.com/search?key=aaa`
-
-{
-	<!-- 用来匹配的项 -->
-	"url": "http://www.taobao.com/search?key=aaa",
-	<!-- 支持正则 -->
-	"route": "/search", 
-	<!-- 请求的数据 -->
-	"data": {
-		"key": "aaa"
-	},
-	<!-- 域 -->
-	"host": "www.taobao.com",
-	<!-- json文件 -->
-	"json": "search.json",
-	<!-- 动态的js -->
-	"jsData": "search.js",
-	<!-- 远程的一个地址，origin则会透明转发 -->
-	"remote": "http://www.tmall.com/search?key=aaa",
-	<!-- 如果是jsonp -->
-	"jsonp": true,
-	<!-- 延时 -->
-	"delay": 1000,
-	<!-- 响应的头 -->
-	"headers": {
-		"Access-Control-Allow-Origin": "*"
-	}
-	<!-- 请求的头 -->
-	"requestHeaders": {
-		"cookie": "NID=102=W21YoOeFkN6ndgJ_ZPQfa12YpMYdLm8Oxcy_QBg5zyQILhQDDhWdWMFBeyzZQmo8FsuykQNCJezRN_WfJ9m9e644dkd9_nH1yVbk2B9LvhL8hYpufpYe39VFvfcKHBa6DzTKKeije1Adlrrf3nw36LMPkDrYA1e1xG4lV4Inr05TCzIzQ6VJcTKudZtY27Kp; DV=UtKgBvHhB6IVLh52YHJ4EGP2UPZItwI; UULE=a+cm9sZToxIHByb2R1Y2VyOjEyIHByb3ZlbmFuY2U6NiB0aW1lc3RhbXA6MTQ5MzExMzE4ODQwOTAwMCBsYXRsbmd7bGF0aXR1ZGVfZTc6MzAyODE4MDY0IGxvbmdpdHVkZV9lNzoxMjAwMTkwNjEyfSByYWRpdXM6MTA3MjYw"
-	}
-}
-
-
-# 文档
-
-想象是一个完全无知的用户，会遇到哪些问题？如何
-
-先介绍清楚是什么东西，anyproxy是什么？一个npm包？帮助解决代理问题。
-
-mockx 本地http代理服务器
-
-快速创建本地代理服务器 

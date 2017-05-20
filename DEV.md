@@ -1,5 +1,4 @@
-
-# 第一阶段 完善好用的本地功能
+# 第一阶段 完善好用的本地功能 这周结束
 
 - 完善的文档，想想如何写一份公开对外的文档 -> mockx我自己的定位呢，到底是什么呢？
 - 插件功能？如果别人的静态资源也有特殊的需求，方案呢？anyproxy的插入方式
@@ -8,10 +7,13 @@
 	除了会跟本地代理有冲突外，还有其他缺点吗？这些功能都能实现吗？
 - flex-hosts用的resolve真的不方便 可以使用pac解决掉 或者还是改成dns.lookup ** 自己用dns.lookup去取到所有的domains配置吧
 - 更好用的API是怎么样的？projectIds我现在可以隐匿掉
+- 将来整站的开发环境会是如何的，看看别人的webpack开发环境
 
 优化
 
 - combo功能，更好看的控制台输出
+- 如果是服务端挂掉的，则也要返回挂掉的，而不是最后一个timeout
+- 还缺少哪些功能呢？模拟404还有什么呢？
 
 - 是否有一个根据当前的url，可以选择添加一条规则，很方便，类似goagentx
 - 移动端如何代理呢？
@@ -36,8 +38,9 @@ table of contents
 https://github.com/nodejitsu/node-http-proxy#options
 (一般我们前端做本地开发，后端接口可能还未准备好，接口可能是`/api/message/list`但是后端接口又没做好，使用mockx，我们通过估计配置把接口`/api/message/list`映射到一个本地文件，而不是修改源代码中ajax请求的url地址) 最好能再带一个原理图呢。
 
+最后要配上一个项目的目录结构
 example
-use cases
+use cases 每个都写上一段和注释
 	webpack开发的接口mock
 		- 可以将/api/* 发送到80端口
 		- 也可以用mockx来承接，将未配置的url再代理到9112端口
