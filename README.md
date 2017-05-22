@@ -5,20 +5,19 @@ mockx - 一个nodejs编写的http|https代理服务器。只需简单的配置�
 
 Features:
 
-- https自动创建证书
-- 静态json集成mockjs功能
-- 自动修改hosts实现代理线上服务
-- 字符串和正则支持可以实现任何复杂代理需求
-- 对代码无侵入
-- 数据mock可共享
+- 替换远程请求到本地文件
+- 支持反向代理
+- 模拟慢速网络
+- 可修改请求头和响应头
+- 自动创建证书
+- 支持HTTP和HTTPS
 
 # Table of Contents 
 
 <!-- MarkdownTOC -->
 
-- Usage
-- 核心理念
-- Example
+- 工作原理
+- Example & Usage
 - Use Cases
 	- webpack本地开发
 	- 替换线上的某个url下内容
@@ -33,69 +32,77 @@ Features:
 
 <!-- /MarkdownTOC -->
 
-## Usage
+## 工作原理
 
-1 安装mockx
+```
+time ==>
+-----------------------
+server:       4
+-------------/-\-------
+hoxy:       3   5
+-----------/-----\----
+hosts:    2       \
+---------/---------\---
+client: 1           6
+```
 
-`npm install mockx`
+1. 客户端发起请求 
+2. hosts文件返回IP 127.0.0.1
+3. 到监听80端口的mockx服务，查找匹配的规则再转给服务器或本地
+4. 服务器端收到请求并发送响应数据
+5. mockx接收并加工数据
+6. 客户端收到响应内容
 
-2 启动mockx
+注：
 
-在项目根目录下执行
+- mockx是运行在本地80端口的服务器，即127.0.0.1:80
+- mockx在有域名映射时，会修改hosts文件添加域名映射到127.0.0.1
 
-`node_modules/.bin/mockx`
-
-3 编写配置文件
-
-初次执行第2步时，会在项目根目录下创建一个`mockx.config.js`. 修改`mockx.config.js`来编写你的规则。
-
-## 核心理念
-
-开发过程中，最头疼的事情就是数据mock，过去的方案要么是修改源代码ajax请求的url，或者是在页面中加一个script拦截ajax，或者charles但是又不能共享。
-
-于是我们通过反向代理服务器的方式，将所有请求到代理服务器，配置代理服务器来决定是走后端的接口，还是mock到本地来实现数据mock, 同时配置文件在项目内，可以随项目共享。
-
-已经在团队内部使用了1年多时间，不断打磨，满足你能想到和未想到的场景。
-
-## Example
+## Example & Usage
 
 完整的项目请见[mockx-example](https://github.com/zzuhan/mockx-example)
 
+项目的目录结构如下
+
+<img src="//img.alicdn.com/tfs/TB1NctDRpXXXXaTXFXXXXXXXXXX-466-752.png" alt="项目目录结构" style="width: 200px;"/>
+
 1 安装mockx
 
 `npm install mockx`
 
 2 启动mockx
 
-在项目根目录下执行
+在项目根目录下执行`sudo node_modules/.bin/mockx`
 
-`node_modules/.bin/mockx`
+因为mockx是监听在80端口，因此要使用`sudo`权限。
 
-3 修改根目录下`mockx.config.js`配置文件
+如果第一次执行，会在项目根目录下创建`mockx.config.js`，即mockx的配置文件。
+
+3 修改`mockx.config.js`配置文件
 
 ```js
 module.exports = {
-	// 需要映射的域名
+	// 
+	// 需要代理的域名
+	// 
 	domains: [
-		'freeway.ju.taobao.com'
+		's.taobao.com'
 	],
 
-	// 相对项目根目录下的mock文件夹
+	// 
+	// mock文件夹
+	//
 	mockDir: './mock',
 
+	// 
 	// 所有的映射规则，详见后面rule编写规则
+	// 
 	rules: [
 
 		// 映射本地json
 		{
 			pathname: '/mockJSON',
 			json: 'jsonfile.json'
-		}, 
-
-		// 映射本地js逻辑返回动态内容
-		{
-			pathname: '/mockJSData',
-			jsData: 'jsData.js'
 		}, 
 
 		// 映射本地的静态文件
@@ -108,14 +115,6 @@ module.exports = {
 		{
 			pathname: '/mockRemote',
 			remote: 'http://www.taobao.com' // remote需要写全，把协议http:带上
-		}, 
-
-		// 映射一个jsonp
-		{
-			pathname: '/mockJSONP',
-			json: 'jsonfile.json',
-			// 这个是 
-			jsonp: 'callback'
 		}
 	]
 }
@@ -123,11 +122,11 @@ module.exports = {
 
 4 访问
 
-`http://localhost/getJSON`或`freeway.ju.taobao.com/getJSON`都将返回`mock/jsonfile.json`内容
+`http://localhost/mockJSON`或`s.taobao.com/mockJSON`都将返回`mock/jsonfile.json`内容
 
 ## Use Cases
 
-下面默认的配置是这样的接口，因此只写了rules 
+下面默认的配置是这样的，因此只写了rules 
 
 ```js
 module.exports = {
@@ -148,7 +147,11 @@ module.exports = {
 
 ### webpack本地开发
 
-webpack是启动在8080端口，需要mock`/api/message/list`这样的接口。我们的思路是都通过localhost来访问。
+一般webpack开发是在`8080`端口，通过`localhost:8080/index.html`来调试。
+
+当需要mock`/api/message/list`这样的接口时。我们的思路是都通过localhost来访问，未命中的地址再转发到`localhost:8080`。
+
+因此我们就通过访问`localhost/index.html`来测试。
 
 ```js
 {
@@ -165,40 +168,45 @@ webpack是启动在8080端口，需要mock`/api/message/list`这样的接口。�
 }
 ```
 
+
 `localhost/index.html`会转发到`localhost:8080/index.html`
 `localhost/api/message/list`会转发到`mock/messageList.json`
 
 ### 替换线上的某个url下内容
 
-替换线上的某个url下内容，排查线上的bug。
-如`https://s.taobao.com/search?q=40530`
+替换线上的某个url下内容，排查线上的bug。如`https://s.taobao.com/search?q=40530`
+
+注：
+
+- 此时需要在domains里添加一条host`s.taobao.com`，mockx启动时会自动在hosts文件中添加一条`127.0.0.1 s.taobao.com`
+
 
 ```js
 {
-	domains: ['s.taobao.com'],
+	domains: [
+		's.taobao.com'
+	],
 	rules: [
 	{
-	pathname: '/search',
-	file: 'search.html'
-},	
-{
-	pathname: /.*/,
-	remote: 'origin'
-}]
+		pathname: '/search',
+		file: 'search.html'
+	},	
+	{
+		pathname: /.*/,
+		remote: 'origin' // origin即原封不动转发，访问`s.taobao.com/api/message`会转到线上真正的`s.taobao.com/api/message`服务
+	}]
 }
 ```
 
 ### 同时代理一批接口
 
-`/api/message/list` `/api/message/create`  `/api/message/get` 下会有一批接口
-
-使用pathname支持正则的特性
+`/api/message/list`，`/api/message/create`，`/api/message/get`这样一批接口需要代理。我们的pathname支持正则，同时在响应字段中有`$n`代表正则里的`()`分组正则表达式在url里匹配到的内容。
 
 ```js
 {
 	rules: [
 	{
-		pathname: '/\/api\/message\/(.*)/i',
+		pathname: /\/api\/message\/(.*)/i,
 		file: '$1.html'
 	}
 }
@@ -207,6 +215,8 @@ webpack是启动在8080端口，需要mock`/api/message/list`这样的接口。�
 访问`/api/message/list`会映射到本地的`mock/list.json
 
 ### query不同返回不同内容
+
+有时需要根据query不同来返回不同内容，使用query字段。
 
 ```js
 {
@@ -230,7 +240,9 @@ webpack是启动在8080端口，需要mock`/api/message/list`这样的接口。�
 
 ### 指定发送的headers或者返回的headers
 
-转发到`http://taobao.com/api/message/create`服务器时headers上会带上cookie，并且返回的headers上会带上`'Access-Control-Allow-Origin`
+指定响应头，如静态资源跨域的`Access-Control-Allow-Origin`。
+
+指定请求头，如在本地模拟登陆的用户信息`cookie`
 
 ```js
 {
