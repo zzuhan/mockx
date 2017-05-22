@@ -8,11 +8,47 @@
 - flex-hosts用的resolve真的不方便 可以使用pac解决掉 或者还是改成dns.lookup ** 自己用dns.lookup去取到所有的domains配置吧
 - 更好用的API是怎么样的？projectIds我现在可以隐匿掉
 - 将来整站的开发环境会是如何的，看看别人的webpack开发环境
+- 默认不集成dip功能，作为一个插件来开发引入
+- 默认不用projectIds，因为功能还没开放
+
+- Features
+	支持http https 默认带证书
+	自动帮你创建https证书
+
+现在
+
+- 小的使用优化(思考了再动手) 都是错误如何展示的 2小时把
+	- 如果remote的服务器挂掉
+	- 如果json写的不规范呢，跟json文件不存在区分开来[]
+	- combo时的output展示[]
+	- 是错误就throw error 一定要明确<q></q>去[]
+	- 如何不打sudo时，就会强制提醒一定要打sudo呢[]
+	- 文件找不到等错误，在web页面中也应该体现出来吧[]
+- 内部的重构，是否使用request来替代过去的http|https
+- 证书问题(花点时间)
+	- combo时，会出现证书找不到的问题，是因为当前这个请求没有给它正确的返回cert吗？[] **
+	- dns的问题 如果本地hosts里写的有dns
+- 文档自己再重头到尾看下
+- 将来版本号以及功能开发的一些规范
+- hoxy http://greim.github.io/hoxy/
+- nproxy https://github.com/goddyZhao/nproxy http://www.siyuweb.com/tool/2631.html
+- livepool http://www.alloyteam.com/2014/07/nodejs-debug-proxy-livepool/
+
+将来的规划
+
+- dip这样的支持作为插件功能(需要思考了 不急)
+- combo这样的也开放为插件？(需要思考的 不急)
+- pac代理(1小时调研下)
+- 移动端支持(1小时调研)
+- webpack工程化(1小时调研)
+- 校验
+	- 后端接口校验
+	- 前端请求校验
+
+- 优化mockx的内部逻辑
 
 优化
 
-- combo功能，更好看的控制台输出
-- 如果是服务端挂掉的，则也要返回挂掉的，而不是最后一个timeout
 - 还缺少哪些功能呢？模拟404还有什么呢？
 
 - 是否有一个根据当前的url，可以选择添加一条规则，很方便，类似goagentx
@@ -39,6 +75,8 @@ https://github.com/nodejitsu/node-http-proxy#options
 (一般我们前端做本地开发，后端接口可能还未准备好，接口可能是`/api/message/list`但是后端接口又没做好，使用mockx，我们通过估计配置把接口`/api/message/list`映射到一个本地文件，而不是修改源代码中ajax请求的url地址) 最好能再带一个原理图呢。
 
 最后要配上一个项目的目录结构
+一个完整的url分解 route是哪部分 data host
+table of contents
 example
 use cases 每个都写上一段和注释
 	webpack开发的接口mock
@@ -67,6 +105,11 @@ Options.rules 有 Note
 	响应
 
 	Note: 只能有一个响应
+
+TODO
+
+说明匹配的顺序和规则
+Features
 
 ## 如何写好技术文档
 
@@ -130,8 +173,6 @@ project详情
 api添加
 
 ## 服务端(能共享) 2.15前搞定
-
-
 
 
 ## 

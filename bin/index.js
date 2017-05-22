@@ -18,7 +18,6 @@ var mockxCacheDir = path.join(cwd, ".mockx");
 // 2 生成一份脚本，
 
 function init(){
-	console.log(confFile);
 
 	ensureConfig();
 	var config = require(confFile);
