@@ -1,3 +1,147 @@
+<!-- MarkdownTOC -->
+
+- 我期待的mockx
+- 一些小反思
+- 代理方式
+- 几个工具对比
+- 那我做什么？疑问
+- 第一阶段 完善好用的本地功能 这周结束
+- 第二阶段 平台化
+- 一些思考
+- 文档
+	- 如何写好技术文档
+- 证书问题
+	- 证书校验的几种类型
+- PAC
+- 插件
+- 参考
+- 项目计划
+	- web-admin\(易上手操作，同时给服务端铺路\) 2.9全部搞定
+	- 服务端\(能共享\) 2.15前搞定
+	- 
+- 问题
+- 计划&优先级
+- mockx-cli
+	- 最简化使用
+- 卖点
+- 数据结构
+- 服务端mock功能
+- 哪几大项
+- 需要做哪些操作
+- thinking
+	- 功能compare
+- TODO
+	- 如何最简化这个项目呢
+	- 需要做的
+	- 设计规划 下一步
+- 将来
+- 畅想一下我们的场景
+- 本周的工作
+
+<!-- /MarkdownTOC -->
+
+# 我期待的mockx
+
+- 与其在这里浪费时间，不知道如何选择，还不如先选择一个方向努力下去呢。先把工具做好并开源出去呢。
+- 工具化，平台化
+	- 因为是独立的，先把工具化做好，先按照打造一个简单易用的工具做起(突破口)
+		- 反问自己，如果业内有这样的一个工具你愿意使用吗？(是否太过复杂了，为什么我不愿意使用anyporxy nproxy) anyproxy在业内应用场景还挺多的 其现在越来越好用了 如何和anyproxy竞争呢？
+		- 是否nrails，陷入了自己觉得设计还不错，但是对于开发者使用成本太高？
+		- 业内别人怎么搭建应用mock服务器
+	- 平台化，暂时使用DIP的方案来搞，不耗费太大的精力
+
+# 一些小反思
+
+- 现在比如映射一个`sale.daily.taobao.net/home.htm`需要1 修改host 2 添加规则  3 添加`.*`这样的规则 4 还需要重启一下
+- 及其简单，比如现在页面上的`getToCheckDetailList`接口，我就想替换下这个接口，测试下是否是这里导致的问题 只用启动，写个简单的规则
+`
+{
+	'test': '/tg/json/getToCheckDetailList.htm',
+	'responder': 'getToCheckDetailList.json'
+}
+`
+
+1 工具 极简 易用
+	- API的极简易用，只需用写rule就可以来拦截并替换。url级别的匹配 [x]
+	- 新的代理方式 1 pac 2 hosts 3 浏览器全局代理 []
+	- 插件支持 combo mockx []
+	- 移动端如何调试呢？[]
+
+2 平台化
+	- 无缝对接文档平台 是projectId或者是schemaId
+
+3 最终的远景是什么？
+	- 专注于文件的替换，并专注于改善现有开发的工作流
+	- 工作流现有dora(webpack全套的)
+
+# 代理方式
+
+- pac(编写PAC, 需要的流量代理到本地)
+	- 可能翻墙的软件也会使用pac会引起冲突
+	- 如果pac文件更新，系统更新是否快？还是及时使用这个pac文件
+
+- 浏览器代理插件(所有流量)
+	【多一下设置的成本】每次需要在浏览器里切换一下(这个貌似无妨) 或者设置osx的系统代理 
+		- 浏览器代理插件
+		- osx的系统代理
+
+	额外的浏览器插件安装
+	移动端设置HTTP代理就可以了
+
+- hosts
+	占用80端口，无法拦截类似`localhost:9000`这样的端口
+
+借鉴 移动端 http://blog.hellofe.com/fe/2014/12/12/proxy-for-mobile-debugging/
+
+如果后续加入了移动端？
+
+- 
+
+# 几个工具对比
+
+1 spy-debugger 针对移动端调试 1 远程调试页面 2 可替换请求内容
+2 anyproxy 开放式代理工具
+3 vconsole 移动端chrome控制台
+  提出了一个控制台的概念 可以将其它的想要的东西通过搜集的方式最终展示在控制台
+4 livepool 调试控制台 但是需要设置浏览器代理到此服务地址 
+	有点麻烦
+	不能共享
+	用起来感觉有点不够靠谱
+5 nproxy 400多的star树 然后需要浏览器代理到这个客户端
+	rule.js 
+	{
+		pattern: '',
+		responder: ''
+	}
+	因为是浏览器代理，不符合的就直接再转发到源地址吧，从控制台出发的不受代理的影响
+6 
+
+这里有这么多的issue
+
+移动端才需要强大的network的查看面板
+
+# 那我做什么？疑问
+
+先做大方向上的规划，再做细枝末节的东西。
+
+跳出这个anyproxy，如果看到市面上的工具，我想要的是什么？
+
+nproxy的简洁，易学，API简单pattern和responder。
+不提供HTTP Inspector 专注在解决前端开发流 专注在代理功能。
+
+- 代理方式的选择 
+	- pac代理 
+	- 设置浏览器代理(2天时间)
+	- 修改hosts
+	- 
+- 移动端代理？(暂时不做)
+- 平台化(这个怎么走？)
+	- 
+- 
+
+
+
+
 # 第一阶段 完善好用的本地功能 这周结束
 
 - 完善的文档，想想如何写一份公开对外的文档 -> mockx我自己的定位呢，到底是什么呢？
@@ -10,7 +154,6 @@
 - 将来整站的开发环境会是如何的，看看别人的webpack开发环境
 - 默认不集成dip功能，作为一个插件来开发引入
 - 默认不用projectIds，因为功能还没开放
-
 - Features
 	支持http https 默认带证书
 	自动帮你创建https证书
@@ -20,7 +163,7 @@
 - 小的使用优化(思考了再动手) 都是错误如何展示的 2小时把
 	- 如果remote的服务器挂掉
 	- 如果json写的不规范呢，跟json文件不存在区分开来[]
-	- combo时的output展示[]
+	- combo时的output展示[x]
 	- 是错误就throw error 一定要明确<q></q>去[]
 	- 如何不打sudo时，就会强制提醒一定要打sudo呢[]
 	- 文件找不到等错误，在web页面中也应该体现出来吧[]
@@ -33,6 +176,11 @@
 - hoxy http://greim.github.io/hoxy/
 - nproxy https://github.com/goddyZhao/nproxy http://www.siyuweb.com/tool/2631.html
 - livepool http://www.alloyteam.com/2014/07/nodejs-debug-proxy-livepool/
+- 可靠性
+	- 所有错误的handle和展示
+	- request的timeout
+	- 错误的正确提示
+- 为什么现在突然创建的ca都显示不安全了
 
 将来的规划
 
@@ -47,10 +195,11 @@
 
 - 优化mockx的内部逻辑
 
+- mockx.config.js的可维护性，多了有点不可维护，web界面，类似chrome的Network那样的筛选
+
 优化
 
 - 还缺少哪些功能呢？模拟404还有什么呢？
-
 - 是否有一个根据当前的url，可以选择添加一条规则，很方便，类似goagentx
 - 移动端如何代理呢？
 - 测试 diff功能？(先下放)
@@ -60,12 +209,36 @@
 
 # 第二阶段 平台化
 
+- 更纯粹，proxy就是一个proxy。只提供代理功能。API可能更简单
+```
+{
+	route: '',
+	// 仅使用target字段
+	target: ''
+}
+```
+
+# 一些思考
+
+- 使用pac后，可以简化书写难度，思考模式是只用考虑我要代理哪些东西？
+	- 不需要被修改/etc/hosts了
+	- 不需要再编写那些
+- 还是缺少思考，这个工具未来是什么？突破点是什么？如果我想出去推广这个工具，还有哪些自己觉得还不够的地方(对比你看到了json-server时)
+	- 平台还是工具，无论是什么webpack还是express还是什么，我的工具都一直有其存在的价值。
+	- 我的突破口是什么？这个东西极其的好用(移动端)？还是做成一个完整的平台？
+	- 思考需要对比的工具(nproxy, pure还是puer 大家对代理工具的吐槽等 以及fillder的思考)
+	- 为什么nproxy没有流行起来，我会去使用这样一个工具吗？(没有真正的做到一个工具就完成所有？这之外还要做很多不能容易的使用掉？)
+	- 至少要在这一个星期想清楚，然后实践下来。
+	- 是否需要一个流量控制web，即web的形式查看网络流量
+- 移动端
+	- 移动端的需求是什么？代理数据的接口，代理js等资源
+	- 移动端一般如何做的？
+- 规划
+	- 这个月完成，后面还有重要的事
 
 # 文档
 
 讲故事的文档？想想自己的思路吧，如何娓娓道来。
-
-
 
 Mockx是NodeJs编写的http代理工具。只需要编写简单的配置，
 
@@ -164,6 +337,68 @@ Features
 - https://github.com/ruanyf/document-style-guide
 - http://yunli.blog.51cto.com/831344/168352
 - https://www.zhihu.com/question/19945828
+
+# 证书问题
+
+- 什么情况下回报证书的错误？
+
+chrome报`NET::ERR_CERT_COMMON_NAME_INVALID`错误 
+
+为什么我的错误没有报错的位置和调用堆栈
+
+合并请求时
+{ [Error: self signed certificate in certificate chain] code: 'SELF_SIGNED_CERT_IN_CHAIN' }
+1 转发到remote为'origin'时
+2 并且这个域名在/etc/hosts文件中编写过映射
+
+单独请求时 unable to get local issuer certificate
+1 转发到remote为'origin'时
+2 并且这个域名在/etc/hosts文件中编写过映射
+
+排除的东西
+
+在命令行直接请求curl时，什么都不需要
+
+可能是什么原因呢？
+
+1 
+2 
+3 
+
+问题
+
+1 https + 域名之前有hosts绑定
+2 再将这个请求再转发到`origin`时会提示，`unable to get local issuer certificate`
+
+排查的过程，原因出在哪里
+
+- 初始化创建的证书的ip跟最终请求的域名的ip不一致？修改flex-hosts? 
+- 但是使用request的https直接请求也是没问题，在有hosts配置时就不行了
+- 还是握手阶段报错出现的
+
+几个解决方式
+
+- pac(不需要再通过我们转发origin)
+- 解决ssl问题，排查并解决问题。先发现为什么这样的问题。
+
+## 证书校验的几种类型
+
+- 直接hosts绑定的服务器，会要求校验证书？
+- key, vert, ca都是什么意思，貌似是两种模式吧，一种是自签名的？
+- strictSSL这些是什么原理？将那个校验过程关闭了。
+- 有哪几种校验，本地对服务端校验，服务端对本地的校验。
+- `unable to get local issuer certificate` 这个是校验阶段谁返回的错误，是哪个原因造成的？
+https://stackoverflow.com/questions/30651407/nodejs-https-request-unable-to-get-issuer-cert-locally
+- `https://github.com/nodejs/node/issues/3742`
+- 为什么我绑定hosts时会出现这些问题呢？
+- 写一个自己对SSL的学习过程和理解吧，如何更高效的学习和理解，因为这个算是有点难的技术。开始没有一个大概的全景图，有哪些知识，哪些分支，有哪些校验，key, cert, ca都是什么鬼。还有服务端对本地的校验。
+- 更多中间人攻击，伪造ca证书
+- flex-hosts创建证书的原理
+- 排查这个bug，如果用什么方式会更好更快呢？
+	- 其中单个单词`ISSUER CERT`是什么意思？
+	- 是验证过程中出的问题？
+	- 别的地方同样的问题，为什么，ssl-strict即ssl的问题
+
 
 # PAC
 
